@@ -1,0 +1,64 @@
+\section{Rice separation and invariance}\label{sec:rice}
+We now combine the two controller branches. Couple an arbitrary host $H$ to $\mathsf C_R$ by taking their deterministic product rule, or tensor product of pre-noise circuits, followed by one whole-symbol or whole-site replacement layer. Denote the result by $J(H,R)$. Each marginal has its exact original kernel. In particular this is a legal input in the corresponding category.
+
+\begin{proposition}[The two branch values]\label{prop:branches}
+For every host $H$,
+\[
+ \sigma(J(H,R))=
+ \begin{cases}
+ \sigma(H),&R\text{ does not tile},\\
+ \sigma_\infty,&R\text{ tiles}.
+ \end{cases}
+\]
+The construction is total computable from the finite presentations.
+\end{proposition}
+\begin{proof}
+For a non-tiling $R$, \eqref{eq:alpha} and Proposition~\ref{prop:preservation} give the first branch. If $R$ tiles, Proposition~\ref{prop:crystal} gives continuum many crystalline extreme controller states. Each has an extreme joint lift by Lemma~\ref{lem:compact}, and its controller observables retain their Bragg moments in the lift. Distinct marginals give distinct lifts. Thus
+$N_{\Br}\ge\frakc$. Since $N_{\Br}\le N_{\ord}\le N\le\frakc$, by Lemma~\ref{lem:two-order} all three counts are exactly $\frakc$. Multiple stationary states make $E$ false and $L$ true. Arbitrary-host extreme lifts need not be spatially ergodic; extremality within the TI stationary set is sufficient here.
+
+Classically, the controller alphabet has $(|R|+1)^2$ letters. The product has $Q=|A_H|(|R|+1)^2$ letters and a stencil of size $n\le|\mathcal N_H|+25K$, so its table has $Q^n$ entries. Enumerating this finite table is an algorithm. Quantumly, dephasing, basis copying, finite lookup and preparation give an exact finite controller circuit; tensoring with the host and appending depolarization are effective finite operations. The rate and dimension remain \eqref{eq:constants}.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:refined}]
+A singleton Wang tile with matching opposite edge colors tiles the plane, so its controller realizes $\sigma_\infty$. Let $P$ be a nontrivial predicate of the datum on the chosen exact input category. There is a finite valid host $H$ whose verdict differs from $P(\sigma_\infty)$; otherwise the predicate would be constant. Fix this witness as a finite constant of the reduction.
+
+Given $e$, compute $R_e$ from \eqref{eq:wang-reduction} and output $J(H,R_e)$. By Proposition~\ref{prop:branches}, halting gives datum $\sigma(H)$ and nonhalting gives $\sigma_\infty$. If $P(\sigma_\infty)$ is false, $e$ halts exactly when the output satisfies $P$. If $P(\sigma_\infty)$ is true, $e$ never halts exactly when it satisfies $P$. These are the asserted many-one reductions. The reduction depends on $P$ only through the fixed witness $H$. Invariance is proved below.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:core}]
+Every predicate of $(N,E,L)$ is also a predicate of the refined datum. Nontriviality on classical inputs is unchanged. The classical part of Theorem~\ref{thm:refined} applies.
+\end{proof}
+
+\begin{proposition}[Bath and coordinate invariance]\label{prop:bath}
+On-site relabeling or unitary conjugation, and adjoining an independent constant bath, preserve every coordinate of $\sigma$.
+\end{proposition}
+\begin{proof}
+A uniform on-site relabeling or unitary commutes with translations. It transports stationary states, extreme points and local observables bijectively, and preserves local convergence, covariance and weighted second moments. Depolarization is unitarily covariant.
+
+For an independent constant bath let $\omega_{\mathrm B}$ be its fixed iid output after one round, including its own noise. On arbitrary correlated or entangled inputs, the one-round product dynamics has output
+\[
+ (\rho_H P_H)\otimes\omega_{\mathrm B}.
+\]
+Indeed the bath channel is trace-and-prepare. Every TI stationary joint state is therefore $\mu\otimes\omega_{\mathrm B}$, uniquely for $\mu\in\cK(H)$. This is an affine homeomorphism; it preserves $N$ and, by the same one-round identity, $E$.
+
+For local joint observables $f,g$, evaluate the bath in $\omega_{\mathrm B}$ to obtain local host observables $G^f,G^g$. When two bath supports are disjoint,
+\[
+ (\mu\otimes\omega_{\mathrm B})(f\tau_xg)=\mu(G^f\tau_xG^g),
+ \qquad (\mu\otimes\omega_{\mathrm B})(f)=\mu(G^f).
+\]
+Thus $\ell$ is preserved for each corresponding state. Expanding a Bragg moment over all pairs gives the same identity except for $O(|B_n|)$ pairs with overlapping supports. After division by $|B_n|^2$ their bounded contribution tends to zero. Every fixed-$q$ Bragg label is therefore preserved. Host observables give both converse implications. This preserves $N_{\ord},N_{\Br}$ and $L$.
+\end{proof}
+
+A shared-flag constant bath also preserves the datum inside the original input category: its all-input coefficient is zero after one round, so Proposition~\ref{prop:preservation} applies. An independent bath product generally has two flags and belongs to the comparison universe specified in Section~\ref{sec:framework}.
+
+\begin{corollary}\label{cor:anchors}
+In both input categories, TI stationary uniqueness, all-law ergodicity, $L$, existence of an ordered or Bragg-ordered extreme TI stationary state, and every positive finite lower threshold on $N_{\ord}$ or $N_{\Br}$ are undecidable. For total $N$, every lower threshold $N\ge k$, $k\ge2$, and the infinite and uncountable count conditions are undecidable. Infinite and uncountable ordered or Bragg-ordered extreme counts are undecidable as well.
+\end{corollary}
+\begin{proof}
+Constant reset has datum $(1,0,0,\mathrm{true},\mathrm{false})$; its unique iid stationary state has decaying covariance and no nonzero Bragg atom. The self-matching-tile controller has $\sigma_\infty$. These witnesses establish nontriviality of every listed predicate. Theorem~\ref{thm:refined} gives the reductions. With reset as host, uniqueness, $E$ and finite upper total-count cuts are halting-hard; order existence and the lower, infinite and uncountable counts are nonhalting-hard. Complements reverse these orientations.
+\end{proof}
+
+For classical inputs, the statements about uniqueness, $E$ and the total count $N$ already follow from \cite[Corollary~3.11]{DMforget}.
+
+For each $k\ge1$, existence of at least $k$ spatially ergodic stationary states with a Bragg atom at some nonzero wavevector is also nonhalting-hard by using $\mathsf C_{R_e}$ alone: its non-tiling branch has $N_{\Br}=0$ by Proposition~\ref{prop:preservation} with a one-point host, and its tiling branch has the witnesses of Proposition~\ref{prop:crystal}. Quantumly, spatial ergodicity here means extremality among all TI states. This separate reduction needs no spatially ergodic lifting through an arbitrary host.
+

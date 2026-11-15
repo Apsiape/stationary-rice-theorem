@@ -1,0 +1,72 @@
+\documentclass[11pt]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[a4paper,textwidth=15.5cm,textheight=23.5cm,centering]{geometry}
+\usepackage{mathtools,amssymb,amsthm}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning}
+\usepackage{booktabs,tabularx}
+\usepackage[unicode,colorlinks=true,linkcolor=blue!45!black,citecolor=blue!45!black,urlcolor=blue!45!black]{hyperref}
+\hypersetup{pdftitle={A Rice theorem for stationary states under fixed noise},pdfauthor={Seth Douglas and Nidhal Mghirbi},pdfsubject={Undecidability and stationary states of noisy lattice dynamics}}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{maintheorem}{Theorem}
+\renewcommand{\themaintheorem}{\Alph{maintheorem}}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\numberwithin{equation}{section}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\supp}{supp}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\R}{\mathbb R}
+\newcommand{\N}{\mathbb N}
+\newcommand{\one}{\mathbf 1}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\TI}{\mathrm{TI}}
+\newcommand{\cK}{\mathcal K}
+\newcommand{\cC}{\mathcal C}
+\newcommand{\cB}{\mathcal B}
+\newcommand{\cD}{\mathcal D}
+\newcommand{\cR}{\mathcal R}
+\newcommand{\cQ}{\mathcal Q}
+\newcommand{\frakc}{\mathfrak c}
+\newcommand{\ord}{\mathrm{ord}}
+\newcommand{\Br}{\mathrm{Br}}
+\setlist[enumerate]{label=\textup{(\roman*)},leftmargin=2em,itemsep=3pt,topsep=4pt}
+\setlist[itemize]{leftmargin=1.7em,itemsep=2pt,topsep=4pt}
+\allowdisplaybreaks[2]
+\title[Stationary states under fixed noise]{A Rice theorem for stationary states\\under fixed noise}
+\author{Seth Douglas}
+\author{Nidhal Mghirbi}
+\date{Version 1.0.0, November 2026}
+\subjclass[2020]{60K35, 37B15, 03D35, 81P45}
+\keywords{Probabilistic cellular automata, stationary states, undecidability, Rice theorem, Bragg order, local quantum channels}
+\begin{document}
+\begin{abstract}
+Which macroscopic questions about a noisy lattice can an algorithm decide from its local rule? Fix dimension seven and one positive rational replacement rate. Every nontrivial property determined by the number of extreme translation-invariant stationary laws, all-law ergodicity, and the existence of a translation-invariant stationary law with nondecaying local covariance is undecidable. A stronger theorem retains the numbers of extreme translation-invariant stationary states with nondecaying covariance and with a Bragg atom at some nonzero wavevector. The same statements hold for finite-depth circuits of local quantum channels with fresh product ancillas, followed by whole-site depolarization. Under a stated published-source condition $C_T$, at another fixed rational rate the total-count cuts ``at most $r$'' and ``at least $k$'' are respectively $\Pi^0_2$-complete for every $r\ge1$ and $\Sigma^0_2$-complete for every $k\ge2$, in both categories. The scope has a decidable boundary: a classical translation-invariant stationary law attains the noise entropy floor exactly when the deterministic rule is constant.
+\end{abstract}
+\maketitle
+\section*{How this work was done}
+The authors directed the work. GPT-6.1 Sol agents in Codesk sessions found the constructions and proofs, with in-session audits, and drafted this text. Claude Opus 5.5, a model from a different family, checked the results refutation-first, ran the literature check and reviewed the text. The authors have not independently verified the mathematical arguments; the verification consists of these model checks.
+\input{sections/introduction}
+\input{sections/framework}
+\input{sections/controller}
+\input{sections/preservation}
+\input{sections/rice}
+\input{sections/completeness}
+\input{sections/entropy}
+\input{sections/discussion}
+\appendix
+\input{sections/counts}
+\input{references}
+\end{document}
+

@@ -1,0 +1,95 @@
+\section{From Wang tilings to crystalline extreme states}\label{sec:controller}
+\subsection{The imported controller}
+The reduction starts from the domino problem \cite{berger,robinson}. We use its effective unseeded form: from a machine index $e$, one computes a finite oriented Wang set $R_e$ such that
+\begin{equation}\label{eq:wang-reduction}
+ R_e\text{ tiles }\Z^2\quad\Longleftrightarrow\quad e\text{ never halts on blank input}.
+\end{equation}
+One implementation is the forced variable-zoom macrotile construction of Durand, Romashchenko and Shen \cite[Sections~2.2--2.3 and~5]{DRS}. Its local coordinate, wire and verifier rules force successively longer computations in every plane tiling. A halt obstructs a sufficiently high level. Without a halt, compatible finite levels exist and compactness gives a plane tiling. This is an unseeded plane construction; its finite tables are computable from $e$.
+
+Here is the exact dynamical theorem imported from our forgetting preprint. We record the rule to fix its noise representation. For a finite Wang set $R$, let $\mathcal A_R=R\sqcup\{\bot\}$. On $\Z^2\times\Z^4$, first let a cardinal checker retain the central tile when the five letters at $\Gamma=\{0,\pm e_1,\pm e_2\}$ are live and the four central shared edges match; otherwise it returns blank. Put
+\[
+ \mathcal V_i=v_i+\{0,\ldots,15\}^4,\quad v_0=0,\quad v_i=160e_i\ (1\le i\le4),
+ \qquad \mathcal V=\bigcup_{i=0}^4\mathcal V_i.
+\]
+The rule $G_R$ at $(u,P)$ returns a tile $r$ if at least $4K$ of the $5K$ checked values at $(u,P+a)$, $a\in\mathcal V$, equal $r$, and returns blank otherwise. At most one tile qualifies. Its stencil is $\Gamma\times\mathcal V$, of size $25K$.
+
+\begin{theorem}[Imported Wang controller]\label{thm:import}
+Use $K,B,\eps_0$ from \eqref{eq:constants}, and let
+\[
+ \kappa=4B^{-99}<1,\qquad c=\log(1/\kappa)/50.
+\]
+For every finite $R$ and every $0<\eps\le\eps_0$, follow $G_R$ by independent uniform whole-symbol replacement at rate $\eps$. At each site and time, a replacement flag and a replacement value, together called the innovations, determine a map from parent words to output letters. Compose these maps using the same innovations for all initial rows, and put
+\[
+ a_t=\Pr\{x\mapsto X_t^x(0)\text{ is nonconstant over all initial rows}\}.
+\]
+If $R$ has no legal $n\times n$ pattern, then
+\begin{equation}\label{eq:import-decay}
+ a_t\le\frac{\exp\{c(762n+1-t)\}}{1-\kappa}\quad(t\ge0).
+\end{equation}
+The bound also holds for replacement-value laws independent of the configuration and shared across starts. If $R$ tiles, there are fully $\Z^6$-TI stationary laws $\mu_1,\mu_0$ with nonblank probabilities at least $1-2\eps$ and at most $2\eps$, respectively.
+\end{theorem}
+
+This is the natural Wang classification theorem, its all-input coalescence lemma, and its persistent-separation argument with planar averaging, in \cite[Theorem~2.1, Lemmas~2.10 and~2.13, and Section~2.20]{DMforget}. Non-tiling has a forbidden finite square by compactness. The source proves the common-map estimate by a flag-only contour bound and deterministic coherence and mortality. The estimate covers all starts on one event, including a pair selected after seeing the innovations. A bound for each separately fixed pair would not supply the argument below. A union bound gives common-map failure at most $|O|a_t$ on a finite set $O$.
+
+\subsection{Pairing, slicing and a uniform parity conjugacy}
+From now on the rate is $\eps_0$. Pair two copies of $G_R$, followed by one uniform whole-pair replacement, and denote this six-dimensional medium by $G_R^{(2)}$. Its deterministic rule and noise commute with the on-site track swap $\mathsf S$. The two marginal kernels are exactly the original controller kernels. If $R$ tiles, start the pair with marginals $\mu_1,\mu_0$; both remain stationary under evolution. A TI Ces\`aro limit gives a stationary joining $\xi_{10}$ with these marginals. Write $\xi_{01}=\mathsf S_*\xi_{10}$ and
+\begin{equation}\label{eq:kp}
+ \xi_p=(1-p)\xi_{10}+p\xi_{01},\qquad
+ g=\one_{\{\text{first live}\}}-\one_{\{\text{second live}\}},
+ \qquad \delta_p=(1-2p)\delta,
+\end{equation}
+where $0<p<1/2$ and $\delta=\xi_{10}(g)\ge1-4\eps_0>1/2$.
+
+Let the rule ignore a seventh coordinate, and place independent identically distributed $\xi_p$ whole slices along that coordinate. The law
+$\nu_p=\bigotimes_{j\in\Z}\xi_p$ is fully TI and stationary. Write
+$\operatorname{par}(x)=\sum_i x_i\pmod2$, and let $T$ apply $\mathsf S$ at odd-parity sites and the identity elsewhere. Write $F_{\mathrm{loc}}=G_R\times G_R$ for the local rule of the paired medium. Conjugating by $T$ gives the \emph{uniform} deterministic local rule
+\begin{equation}\label{eq:gauge}
+ F'(y)(x)=F_{\mathrm{loc}}\bigl((\mathsf S^{\operatorname{par}(a)}y(x+a))_{a\in\mathcal N}\bigr).
+\end{equation}
+Indeed $\operatorname{par}(x+a)=\operatorname{par}(x)+\operatorname{par}(a)$ and global swap equivariance cancels both factors depending on $x$. Uniform pair replacement is swap invariant. Thus the conjugated medium, denoted $\mathsf C_R$, is a legal TI input with the same whole-symbol noise. The parity map is a way of deriving its finite table, rather than an inhomogeneity in the input.
+
+If $R$ does not tile, each original track has coefficient $a_m\to0$. A union over tracks and conjugacy show that $\mathsf C_R$ has one-site all-input failure at most
+\begin{equation}\label{eq:alpha}
+ \alpha_m=2a_m\longrightarrow0.
+\end{equation}
+The slice restriction leaves the estimate unchanged even for initially correlated slices.
+
+\begin{proposition}[Crystalline amplification]\label{prop:crystal}
+If $R$ tiles, $\mathsf C_R$ has continuum many distinct TI stationary laws that are extreme among all TI laws and have a Bragg atom at $q_\pi=(\pi,\ldots,\pi)$. Each is an equal mixture of two distinct non-TI periodic stationary laws.
+\end{proposition}
+\begin{proof}
+Set
+\[
+ \rho_{p,0}=T_*\nu_p,\qquad \rho_{p,1}=T_*\mathsf S_*\nu_p,
+ \qquad \rho_p=\tfrac12(\rho_{p,0}+\rho_{p,1}).
+\]
+Both components are stationary by conjugacy. Even-parity translations preserve each and odd-parity translations exchange them, because $\nu_p$ is TI and $\tau_xT=\mathsf S^{\operatorname{par}(x)}T\tau_x$. Their average is therefore fully TI.
+
+Fix a bounded local real $f$ and its ordinary cube average $\overline f_n$. Each component is a product over whole seventh-coordinate slices, with alternating slice laws. Two translates of $f$ are independent if their finite sets of slices are disjoint. Among the $|B_n|^2$ pairs, only $O_f(|B_n|^2/n)$ can share a slice. Boundedness therefore gives
+$\operatorname{Var}_{\rho_{p,i}}(\overline f_n)=O_f(1/n)$.
+The component means of translates of $f$ take two parity values, interchanged between $i=0,1$. The fractions of even and odd sites in a cube differ by at most $1/|B_n|$. Thus the two component cube means have the same limit. Variance decomposition yields
+\begin{equation}\label{eq:spatial-variance}
+ \operatorname{Var}_{\rho_p}(\overline f_n)\longrightarrow0.
+\end{equation}
+If $\rho_p=t\omega_0+(1-t)\omega_1$, $0<t<1$, for TI laws, the variance is at least
+$t(1-t)(\omega_0(f)-\omega_1(f))^2$.
+Equation~\eqref{eq:spatial-variance} forces equality on every local observable, so the decomposition is trivial. This proves extremality among all TI laws, hence among TI stationary laws.
+
+With $\chi(x)=(-1)^{\sum_i x_i}$, the one-site means of $g_x$ in the two components are $\chi(x)\delta_p$ and $-\chi(x)\delta_p$. Consequently the staggered average $\operatorname{Av}_n^{q_\pi}(g)$ has component means $\delta_p$ and $-\delta_p$, for every $n$, and
+\[
+ \rho_p\bigl((\operatorname{Av}_n^{q_\pi}(g))^2\bigr)\ge\delta_p^2>0.
+\]
+Independence of distinct slices also gives
+\[
+ \rho_p(g_0)=0,\qquad
+ \rho_p(g_0g_{je_7})=(-1)^j\delta_p^2\quad(j\ne0).
+\]
+In particular $\rho_p(g_0g_{2e_7})=\delta_p^2$ distinguishes all $p\in(0,1/2)$. There are continuum many such laws, and Lemma~\ref{lem:compact} gives the matching upper bound. The two components have opposite nonzero $g_0$ means, so they are distinct and non-TI, as claimed.
+\end{proof}
+
+Classically, extremality among all TI laws is spatial ergodicity. In the quantum realization of Section~\ref{sec:preservation}, the same variance proof applies to every local Hermitian observable: the state is diagonal and a product over slices in each component. It is therefore extreme among all TI quantum states as well. The witnesses are layered and anisotropic. Their extremality is relative to spatial translation invariance; they are explicitly not extreme among all stationary states.
+
+
+
+
+

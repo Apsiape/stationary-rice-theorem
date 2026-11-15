@@ -1,0 +1,196 @@
+\section{Preserving an arbitrary host}\label{sec:preservation}
+
+The controller must forget jointly with its graphical maps.  Forgetting
+of its marginal law alone would leave open the possibility of stationary
+correlations between the host and controller.  We prove the required
+joint statement for classical hosts and for local quantum circuits.
+
+\subsection{Quantum presentations and a local implementation}
+The classical controller has an exact implementation in the quantum category of Section~\ref{sec:framework}.
+Represent its alphabet by an orthonormal basis.  First dephase the old
+registers and introduce fresh scratch and output registers in fixed
+product states.  For every read offset \(a\), copy the basis value of
+\(\mathrm{main}_{x+a}\) to its designated scratch register at \(x\).
+For fixed \(a\), these gates act on pairwise disjoint registers as \(x\)
+varies: every source and every destination scratch register is used
+once, and main and scratch registers are distinct.  Thus one
+translation-invariant layer suffices for each offset.  A controlled
+modular-addition gate performs the copy; initial dephasing makes this
+a copy of classical data.  At each destination, compute the finite
+lookup table into its output register and discard the old and scratch
+registers.  The resulting channel has exact algebraic entries and
+finite depth and range.  It prepares basis-diagonal outputs, so its
+stationary quantum states are exactly the diagonal embeddings of the
+classical stationary laws.
+
+\subsection{Shared replacement and finite-past comparison}
+Let \(C\) denote the crystalline controller \(\mathsf C_R\), and let \(H\) be
+an arbitrary host in either input category.  Form \(J\) by applying
+the two pre-noise updates separately and then one uniform replacement
+of the whole pair, at rate \(\eps_0\).  Quantumly the reset branch is
+\(\cR_H\otimes\cR_C\), where
+\(\cR_H(X)=\Tr(X)I_H/d_H\), and similarly for \(C\).  Partial trace
+shows that the two marginal updates are exactly those of \(H\) and
+\(C\).  Their replacement flags are shared.
+
+On the non-tiling branch, the imported controller bound
+\cite{DMforget} and the two-track construction give a one-site
+all-input common-map nonconstancy bound
+\(\alpha_m=2a_m\to0\).  The event concerns all initial controller
+configurations simultaneously and depends only on the recent flags
+and replacement symbols.  A union bound gives error
+\(\lvert O_C\rvert\alpha_m\) on a finite controller observation
+region \(O_C\).
+
+For a host law or state \(\mu\), let \(W_m(\mu)\) be the joint
+output after \(m\) rounds when the host starts from \(\mu\) and the
+controller starts from a fixed constant basis configuration.  The
+following bound holds for every joint initial law or state \(\rho\),
+with host marginal \(\rho_H\):
+\begin{equation}\label{eq:reset-estimate}
+ d_O\bigl(\rho P_J^m,W_m(\rho_H)\bigr)
+ \le \lvert O_C\rvert\alpha_m.
+\end{equation}
+Here \(d_O\) is total variation on a finite classical observation or
+trace distance \(\tfrac12\|\cdot\|_1\) on a finite quantum
+observation, and \(O_C\) is its controller support.  Classically,
+retain the same host start and the same recent innovations, and
+replace only the controller start.  The observed outputs agree on
+the all-input-good event, which proves the bound.
+
+For the quantum proof, resolve the controller reset as
+\[
+ \cR_C=\frac1{d_C}\sum_z\cR_{C,z},\qquad
+ \cR_{C,z}(X)=\Tr(X)|z\rangle\langle z|.
+\]
+Condition on the finite graphical data \(\omega\) in the backward
+observation cone: the shared replacement flags and the uniform
+controller replacement symbols.  Branch by branch, the channel on
+the two complete tracks factors as
+\(\Phi_{H,\omega}\otimes \Phi_{C,\omega}\).  The host factor includes the
+specified host reset locations.  The controller factor starts with
+complete dephasing and thereafter applies classical graphical maps.
+On the good event every input basis word gives the same observed
+controller output \(c_\omega\).  Dephasing kills off-diagonal matrix
+units, so the reduced controller channel is the linear map
+\[
+ X\longmapsto\Tr(X)P_\omega,\qquad
+ P_\omega=|c_\omega\rangle\langle c_\omega|.
+\]
+For every joint input, including an entangled one,
+\[
+ \bigl(\Phi_{H,\omega}\otimes[\Tr(\cdot)P_\omega]\bigr)(\rho_{HC})
+ =\Phi_{H,\omega}(\rho_H)\otimes P_\omega.
+\]
+Thus the actual output and the comparison output agree on each good
+branch.  Their trace distance on a bad branch is at most one.
+Averaging proves~\eqref{eq:reset-estimate}.  This is a channel
+identity on finite cones, so it applies to arbitrary lattice states.
+
+\begin{proposition}[Stationary preservation]\label{prop:preservation}
+On the non-tiling branch, host projection is an affine homeomorphism
+\(\cK(J)\to\cK(H)\).  It preserves \(E\), and for each corresponding
+pair of states it preserves the local covariance-order label and
+\(b_q\) for every fixed nonzero wavevector \(q\).  Consequently
+\(\sigma(J)=\sigma(H)\).
+\end{proposition}
+
+\begin{proof}
+\emph{Stationary correspondence.}
+Every stationary host state has a stationary joint lift: start with
+that host marginal and a constant controller, and take a Ces\`aro
+limit.  The host marginal remains fixed at every time.  This also
+works without translation invariance; with a translation-invariant
+host and constant controller, the lift is translation invariant.
+If \(\gamma\) is any stationary lift of \(\mu\),
+\eqref{eq:reset-estimate} gives
+\[
+ d_O\bigl(\gamma,W_m(\mu)\bigr)
+ \le\lvert O_C\rvert\alpha_m.
+\]
+Any two lifts therefore agree on every finite observation as
+\(m\to\infty\).  Projection is a continuous affine bijection between
+compact stationary sets, hence a homeomorphism; its inverse is
+affine.  In particular, it bijects their extreme points, including
+when the extreme sets are infinite.
+
+\emph{Attraction of all initial states.}
+Suppose first that the host has a unique stationary state \(\mu\)
+attracting every initial state locally.  The preceding argument,
+without translation invariance, gives its unique stationary joint
+lift \(\gamma\).  For any joint initial state \(\rho\), apply
+\eqref{eq:reset-estimate} to the final \(m\) rounds before time
+\(t\ge m\).  The comparison output is
+\(W_m(\rho_H P_H^{t-m})\).  At fixed \(m\), each finite restriction
+of \(W_m\) depends continuously on finitely many host coordinates,
+so this converges locally to \(W_m(\mu)\) as \(t\to\infty\).
+The latter lies within \(\lvert O_C\rvert\alpha_m\) of
+\(\gamma\).  First take \(t\to\infty\), then \(m\to\infty\).
+This proves attraction to \(\gamma\).  Conversely, every host initial
+state has a joint extension, and every stationary host state has a
+stationary lift.  Joint attraction and uniqueness therefore imply
+host attraction and uniqueness by projection.  Hence \(E(J)=E(H)\).
+
+\emph{Covariance order for each state.}
+Fix corresponding translation-invariant stationary states
+\(\mu,\gamma\), and real or Hermitian joint local observables \(f,g\).
+Let \(r\) bound the number of controller sites in either support.
+The two-observation version of~\eqref{eq:reset-estimate}, together
+with the first- and second-moment bounds, gives, uniformly in \(x\),
+\begin{equation}\label{eq:covariance-error}
+ \left|\Cov_\gamma(f,\tau_xg)
+       -\Cov_{W_m(\mu)}(f,\tau_xg)\right|
+ \le 8\|f\|\|g\|r\alpha_m.
+\end{equation}
+At fixed \(m\), evaluating the recent innovations and the fixed
+initial controller gives local host observables
+\(G_m^f=W_m^*(f)\) and \(G_m^g=W_m^*(g)\).
+Classically these are conditional expectations given the initial
+host configuration. Distant backward cones have independent
+innovations, so
+\[
+ W_m(\mu)(f\tau_xg)=\mu(G_m^f\tau_xG_m^g).
+\]
+Quantumly the two host observables are Hermitian. Because gates
+use independent product ancillas, disjoint backward circuits give
+the operator identity
+\[
+ W_m^*(f\tau_xg)=G_m^f\tau_xG_m^g.
+\]
+This holds before evaluating the host state, including spatially
+entangled inputs. Equality of first moments therefore makes the
+comparison covariance \(\Cov_\mu(G_m^f,\tau_xG_m^g)\).
+If \(\mu\) lacks \(\ell\), this tends to zero for every fixed
+\(m\). Taking separation to infinity in~\eqref{eq:covariance-error},
+then \(m\to\infty\), excludes \(\ell\) in \(\gamma\).
+Conversely, witnessing host observables retain their moments in
+the joint state. Thus \(\ell\) is preserved for every corresponding
+pair, and the affine bijection preserves \(N_{\ord}\) and \(L\).
+
+\emph{Bragg order at a fixed wavevector.}
+Fix \(q\ne0\) and a real or Hermitian \(f\) with controller-support size \(r\); put \(G_m=W_m^*(f)\). Expanding the weighted
+second moment gives products \((\tau_xf)(\tau_yf)\), whose
+coefficients all have modulus one.  For fixed \(m\), only
+\(O_m(|B_n|)\) of the pairs \((x,y)\in B_n^2\) have intersecting
+backward cones.  The factorization above is exact on every other
+pair.  Boundedness on the remaining pairs gives
+\[
+ \left|W_m(\mu)\bigl(\operatorname{Av}_n^q(f)^*\operatorname{Av}_n^q(f)\bigr)
+       -\mu\bigl(\operatorname{Av}_n^q(G_m)^*\operatorname{Av}_n^q(G_m)\bigr)\right|
+ \le \frac{c^{\Br}_{m,f}}{|B_n|}.
+\]
+Applying~\eqref{eq:reset-estimate} to the union of the two translated
+supports bounds the additional stationary/comparison moment error
+by \(8\|f\|^2r\alpha_m\), independently of \(n\).  If \(\mu\) lacks
+\(b_q\), the host weighted moment tends to zero for each fixed
+\(G_m\).  First send \(n\to\infty\), then \(m\to\infty\), to
+exclude \(b_q\) in \(\gamma\).  Presence passes to the joint state
+by using the witnessing host observable.  Thus \(b_q\) is preserved
+for every fixed \(q\), and the corresponding states have identical
+sets of nonzero Bragg wavevectors.  The bijection of extreme points
+therefore also preserves \(N_{\mathrm{Br}}\).
+\end{proof}
+
+
+
+

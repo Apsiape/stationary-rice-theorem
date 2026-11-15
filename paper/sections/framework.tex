@@ -1,0 +1,89 @@
+\section{Inputs, stationary data and the refined theorem}\label{sec:framework}
+\subsection{Two effective input categories}
+A classical input consists of a nonempty finite alphabet $\mathsf A$, a finite stencil $\mathcal N\subset\Z^7$, and a deterministic table $F:\mathsf A^{\mathcal N}\to\mathsf A$. One round applies $F$ at every site and then replaces each whole output symbol independently by a uniform symbol with probability $\eps_0$. The flags and replacement values are independent across sites and times. The resulting local transition probabilities are
+\[
+ p(a\mid u)=(1-\eps_0)\one_{\{a=F(u)\}}+\eps_0/|\mathsf A|.
+\]
+All entries are positive. Finite alphabets and stencils are unbounded over the input category.
+
+A quantum input has a finite-dimensional site space $\mathbb C^d$ and a finite list of layers of finite-range local completely positive trace-preserving (CPTP) gates. Gates have exact algebraic Choi or Kraus entries and use fresh independent product ancillas. A layer acts on disjoint registers; a finite periodic schedule is permitted when the overall channel $\Phi$ is translation invariant. CPTP validity and overall translation invariance are promises on the presentation. After $\Phi$, every whole site independently undergoes
+\[
+ \cD_{\eps_0}(X)=(1-\eps_0)X+\eps_0\Tr(X)I_d/d.
+\]
+Arbitrary initial states, including entangled ones, are allowed. Disjoint sufficiently distant output cones use disjoint circuits and independent environments. A causal channel supplied with globally shared randomness need not have this property and is outside this category.
+
+\subsection{The datum}
+Write $\cK(M)$ for the compact convex set of all translation-invariant stationary laws or states of $M$. Translation invariance always means invariance under every spatial translation. In both categories, local convergence means convergence of every finite-region marginal. A state is extreme here precisely when it belongs to $\Ext\cK(M)$.
+
+For real classical or Hermitian quantum local observables $f,g$, write
+\[
+ \Cov_\omega(f,\tau_xg)=\omega(f\tau_xg)-\omega(f)\omega(\tau_xg).
+\]
+Let $\ell(\omega)$ mean that some such $f,g$ satisfy
+$\limsup_{|x|\to\infty}|\Cov_\omega(f,\tau_xg)|>0$.
+For $B_n=\{0,\ldots,n-1\}^7$ and a nonzero wavevector
+$q\in(\R/2\pi\Z)^7$, define
+\begin{equation}\label{eq:bragg}
+ \operatorname{Av}_n^q(f)=\frac1{|B_n|}\sum_{x\in B_n}e^{-iq\cdot x}\tau_xf,
+ \qquad b_q(\omega)\iff
+ \exists f:\limsup_n\omega\bigl(\operatorname{Av}_n^q(f)^*\operatorname{Av}_n^q(f)\bigr)>0.
+\end{equation}
+When $b_q(\omega)$ holds we say that $\omega$ has a Bragg atom at $q$. To see the spectral meaning, implement translations in the classical $L^2$ space or the quantum GNS space. For the commuting unitaries $V_i=e^{-iq_i}U_i$, cube averages vanish on every coboundary $v-V_iv$ by telescoping. The closed span of these coboundaries has orthogonal complement the joint fixed space. Contraction and density show that the cube averages converge to its orthogonal projection. The second moment in \eqref{eq:bragg} therefore has a limit equal to the squared norm of the projection of the observable vector.
+
+The refined datum is
+\begin{equation}\label{eq:datum}
+ \sigma(M)=(N,N_{\ord},N_{\Br},E,L),
+\end{equation}
+where
+\begin{align*}
+ N&=|\Ext\cK(M)|,\\
+ N_{\ord}&=|\{\omega\in\Ext\cK(M):\ell(\omega)\}|,\\
+ N_{\Br}&=|\{\omega\in\Ext\cK(M):\exists q\ne0\ b_q(\omega)\}|.
+\end{align*}
+Here $E$ means that a unique stationary state among all states attracts every initial state locally; $L$ means $\exists\omega\in\cK(M):\ell(\omega)$. The cardinalities are full cardinalities. In particular $N_{\Br}$ counts states with a peak at \emph{some} nonzero wavevector.
+
+A predicate is a function of $\sigma$ if equal data force equal verdicts. We allow arbitrary coupled dependence on its five coordinates; only realized values matter. An independent constant bath is a second on-site track whose pre-noise rule is constant (quantumly, a fixed on-site preparation), followed by its own independent replacement or depolarization at the host rate. To discuss independent constant baths and arbitrary on-site unitaries, define the same datum on the larger class of locally implemented media with unrestricted channel entries, including independent bath products. Such operations can leave the single-replacement or exact-algebraic input category. Decision problems and nontriviality below are restricted to the finite exact inputs just specified.
+
+The full result strengthens Theorem~\ref{thm:core}.
+\begin{maintheorem}[Stationary-state Rice theorem]\label{thm:refined}
+Set
+\begin{equation}\label{eq:constants}
+ K=16^4,\quad \Delta=18\cdot5K,\quad B=2\Delta^2,
+ \quad D=7,\quad \eps_0=B^{-200}.
+\end{equation}
+In each input category separately, every nontrivial predicate of $\sigma$ is undecidable. Let
+\[
+ \sigma_\infty=(\frakc,\frakc,\frakc,\mathrm{false},\mathrm{true}),
+ \qquad \frakc=2^{\aleph_0}.
+\]
+This value is realized. If the predicate is false at $\sigma_\infty$, halting many-one reduces to it; if true there, nonhalting many-one reduces to it. Every predicate of the datum is invariant under on-site relabeling or unitary conjugation, as appropriate, and adjoining an independent constant bath.
+\end{maintheorem}
+
+Exactly-$k$ conditions are subject to nontriviality. For each finite $k\ge2$, realizability of $N=k$ at these parameters remains open; if realized, deciding $N=k$ is halting-hard. The universal condition $N\ge1$ is trivial. The theorem concerns this stationary datum, with varying finite alphabet or site dimension and range. Full stationary-set isomorphism, entanglement, storage, topological order and equilibrium Gibbs properties require other arguments. We make no fixed-alphabet or lower-dimensional assertion.
+
+\subsection{Compactness and extreme lifts}
+We give the elementary facts needed in the proof.
+\begin{lemma}\label{lem:compact}
+The set $\cK(M)$ is nonempty compact and metrizable, and has at most $\frakc$ points. Every nonempty compact face contains an extreme point. An autonomous on-site factor induces an onto continuous affine map of TI stationary sets, and every extreme factor state has an extreme joint lift.
+\end{lemma}
+\begin{proof}
+A classical law is specified by consistent finite-cylinder probabilities; a quantum state by consistent positive finite-region density matrices of trace one. Each coordinate lies in a compact finite-dimensional set. A diagonal subsequence and consistency give compactness and metrizability. TI equations are closed. Stationarity is closed because the one-step Heisenberg image of a local observable is local. Ces\`aro averages of iterates of a TI initial state have stationarity defect at most $2\|f\|/T$ on $f$ and hence yield a stationary TI limit. There are countably many determining real local coordinates, which also bound the cardinality by $\frakc$. The same argument without TI gives stationary existence among all states.
+
+On a compact face, maximize the first coordinate, then the second on that maximizing face, and continue. Nested compactness gives an intersection in which all determining coordinates are fixed, hence one point. Any convex decomposition stays in every maximizing face, so this point is extreme in the original set. If a compact convex set has two points, a separating coordinate has disjoint minimizing and maximizing faces, each with an extreme point. Consequently $N=1$ is equivalent to uniqueness within $\cK(M)$.
+
+Given a stationary factor state, start the joint process with that marginal and a fixed TI auxiliary state. The factor marginal remains fixed, and a Ces\`aro limit is a stationary joint lift. Projection is continuous and affine. The fiber over an extreme factor state is a compact face: a convex decomposition projects to a decomposition of that extreme state. Applying the preceding construction in the fiber produces an extreme joint lift.
+\end{proof}
+
+The statistic is coarse. In a compact metrizable convex set the nonextreme points form a countable union of compact sets: use midpoints of pairs whose distance is at least $1/j$. Thus the extreme set is $G_\delta$. The perfect-set theorem for Polish spaces gives $N\in\{1,2,\ldots,\aleph_0,\frakc\}$ without a continuum-hypothesis assumption. Moreover $N\ge2$ implies $E=\mathrm{false}$ and $L=\mathrm{true}$.
+\begin{lemma}\label{lem:two-order}
+Two distinct TI stationary states imply $L$. A Bragg atom at a nonzero wavevector implies $\ell$ for that state.
+\end{lemma}
+\begin{proof}
+Choose a local real or Hermitian $f$ with distinct means $a_0,a_1$ in two states and take their equal mixture $\omega$. For the ordinary cube average $\overline f_n$, variance decomposition gives
+$\operatorname{Var}_\omega(\overline f_n)\ge(a_1-a_0)^2/4$.
+If the covariance tended to zero, expansion as a double sum would make this variance tend to zero: only $O(|B_n|)$ pairs have any fixed bounded displacement, and far covariances are arbitrarily small. This contradiction proves $L$.
+
+For $q\ne0$, the weighted mean $\omega(\operatorname{Av}_n^q(f))$ tends to zero by a geometric-sum factor in a coordinate with $q_i\ne0$. If connected covariance decayed, its weighted double sum would vanish by the same near-pair/far-pair argument. Thus a positive Bragg moment forces nondecay.
+\end{proof}
+
+

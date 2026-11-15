@@ -1,0 +1,475 @@
+\section{Phase-count completeness from totality}\label{sec:completeness}
+The halting reduction preserves all-law ergodicity because its controller
+forgets every start. For total-count completeness, stationary
+common-noise couplings suffice. This section uses the input categories
+of Section~\ref{sec:framework} with the rate replaced by
+\begin{equation}\label{eq:totality-rate}
+ \eps_1=160000^{-101}.
+\end{equation}
+
+\subsection{The source condition}
+\emph{Condition \(C_T\)} is the validity of the repaired
+T\"orm\"a-based totality source with the following interface, using
+\cite[Lemma~25, Corollary~26 and Lemmas~27--29]{torma} as published.
+There is a total computable family of one-dimensional radius-one
+CA \(U_e\), with finite alphabet \(\mathsf D_e\), blank \(0\), and
+local table \(u_e:\mathsf D_e^3\to\mathsf D_e\), such that:
+\begin{enumerate}
+\item \(u_e(0,0,0)=0\). If the partial computable function
+\(\varphi_e\) is total, every fully \(\Z^2\)-TI law on the
+two-sided input-erasure trajectory SFT is all blank.
+\item If \(\varphi_e\) is not total, the ordinary two-sided
+trajectory SFT has a fully \(\Z^2\)-TI law with positive
+nonblank activity.
+\end{enumerate}
+Here input erasure means replacing selected parent symbols by \(0\)
+from one common preceding row. The repaired source reserves zero
+for each bookkeeping field's blank value, normalizes invalid own
+bookkeeping to blank, leaves simulated data unrestricted, and
+increments age only while live; field widths are fixed before
+self-reference. Quiescence of the universal layer is part of this
+source premise. The interface is stronger than deterministic
+unique ergodicity. The cited published lemmas supply the macrocell,
+overlap, rigidity, connecting and live-coverage ingredients; their
+internal proofs are used as published.
+
+\subsection{A controller with diagonal stationary couplings}
+A canonical common-noise pair uses the same replacement flag and
+replacement letter in both replicas at each site and time. Say a
+controller has the \emph{diagonal-coupling property} if every TI
+stationary law of this pair kernel is supported on equal replicas.
+
+\begin{lemma}\label{lem:totality-controller}
+Under \(C_T\), one can compute from \(e\) a deterministic rule
+\(G_e\) on \(\Z^6\), of maximum-norm radius at most \(11\), followed
+by uniform replacement at \(\eps_1\), such that totality gives the
+diagonal-coupling property and nontotality gives two distinct TI
+stationary laws.
+\end{lemma}
+\begin{proof}
+\emph{Certificates and quorum.}
+Put
+\[
+ \mathsf L_e=\{0\}\sqcup
+ \{(a,w):a\ne0,\ w\in\mathsf D_e^3,\ u_e(w)=a\},
+ \qquad \operatorname{sym}(0)=0,\quad
+ \operatorname{sym}(a,w)=a.
+\]
+On \(u=(i,s)\in\Z^2\), let \(H_{0,e}\) retain a nonblank
+label \((a,w)\) exactly when every nonzero \(w_j\) agrees with
+the symbol at \((i+j,s-1)\), \(j=-1,0,1\); otherwise delete it.
+Blank centers remain blank. A fixed field projects to an
+input-erasure trajectory, using its stored witness at a nonblank
+center and erasing all parents at a blank one. Conversely, an
+ordinary trajectory lifts by storing its actual predecessor word.
+
+Physical sites are \((u,P)\in\Z^2\times\Z^4\).
+Let \(H_e\) require, in addition, equality of the full label with
+all eight transverse unit neighbors. Its stencil is
+\[
+ \mathcal N_*=
+ \bigl(\{0,(-1,-1),(0,-1),(1,-1)\}\times\{0\}\bigr)
+ \cup\{(0,\pm e_j):1\le j\le4\}.
+\]
+Use providers at \(c_0=0\), \(c_j=10e_j\), \(1\le j\le4\).
+The rule \(G_e\) returns a nonblank label if four of the five
+provider values of \(H_e\) equal it, and returns \(0\) otherwise.
+The \(60\) read offsets are distinct and have radius at most \(11\).
+Since \(|\mathsf L_e|\le1+|\mathsf D_e|^3\), its finite table is
+computable from the source table.
+
+\emph{Noise marks.}
+Write \(\mathsf{Flag}_t(v)\) for the iid replacement flags. Mark a site if
+it is flagged or if two distinct providers each have a marked
+\(\mathcal N_*\)-parent. Empty starts receding to the past give
+the least two-sided mark field \(E^*\), a stationary causal
+factor of the flags. Every mark has a finite support graph
+ending at distinct physical flags.
+
+Here are the flag estimates used below. The backward graph has
+undirected degree at most \(120\); use \(d_*=200\). The five
+potentials
+\[
+ \psi_j(P,t)=-P_j-2t\quad(1\le j\le4),\qquad
+ \psi_0(P,t)=\sum_{j=1}^4P_j+8t
+\]
+sum to zero. Provider \(j\) is excluded for \(\psi_j\),
+\(0\le j\le4\). Along a backward provider step the gain is at least
+\(1\) except at the excluded provider, and every gain
+is at least \(-9\). Two distinct providers therefore offer a
+good step for each potential.
+
+To count a finite support graph while reusing terminals correctly,
+group frontier vertices by overlap of their descendant-terminal
+sets. Exposing the two supports of one vertex can split its
+component into at most two and cannot merge different components.
+Start with one pole at the root, and keep one terminal endpoint
+of each potential in each component.
+At a split add a pole, sending its arm of each potential to the
+daughter lacking that endpoint. Only that first edge may be bad.
+In the original root's arm component, \(n_{\mathrm f}\) distinct
+terminal flags give \(n_{\mathrm f}\) poles and at most
+\(5(n_{\mathrm f}-1)\) bad edges. For each potential the arms
+biject these poles with the terminal flags. The sum of all arm
+gains is zero, since the potentials balance at each pole and
+terminal. Telescoping bounds the total number of arm edges by
+\(50(n_{\mathrm f}-1)\): replacing a gain of at least \(1\) by
+one of at least \(-9\) loses at most \(10\).
+Physical projection cannot increase
+edge count or time span.
+
+A rooted connected graph with \(a\) edges has at most
+\(d_*^{2a}\) doubled-walk encodings and \(2^{a+1}\) choices of
+terminal subset. Distinct flags cost \(\eps_1^{n_{\mathrm f}}\), even when
+several arms reach the same flag. Thus, with
+\[
+ \lambda=2d_*^2\eps_1^{1/50}
+       =\tfrac12\,160000^{-51/50}<\tfrac12,
+\]
+the mark density satisfies
+\begin{equation}\label{eq:mark-density}
+ p_*:=\Pr(E^*(0)=1)
+ \le\eps_1+2\eps_1\sum_{a\ge1}\lambda^a
+ <3\eps_1<\tfrac12.
+\end{equation}
+For a marked nonflagged backward path of length \(n\), take complete
+support graphs in successive disjoint time slabs, restarting below
+the earliest terminal of each and keeping the last graph complete.
+Their distinct \(n_{\mathrm f}\) flags cover \(n\le50n_{\mathrm f}\)
+path steps. The connected union has \(n\le a\le100n_{\mathrm f}\)
+edges. The same counting gives
+\begin{equation}\label{eq:marked-path}
+ \Pr(\text{such a path from a fixed root})
+ \le \frac{2\gamma_*^n}{1-\gamma_*},\qquad
+ \gamma_*=2d_*^2\eps_1^{1/100}
+         =\tfrac12\,160000^{-1/100}<\tfrac12.
+\end{equation}
+Consequently infinite marked nonflagged backward paths have
+probability zero, simultaneously at all countably many roots.
+
+\emph{Clean extraction.}
+Call an unmarked site clean. Two clean nonblank labels at the
+same \(u,t\) agree, even at different transverse positions.
+Indeed each has four supporters, so their supporter sets intersect
+in at least three indices. Each clean root has at most one dirty
+provider; after excluding both dirty indices a common wholly clean
+supporter remains. Its transverse equality checks move one label
+one unit toward the other at the preceding physical time.
+Iterating decreases their transverse \(\ell^1\) distance until
+they occupy the same site, proving equality of the full labels.
+
+Augment any TI stationary noisy law by its two-sided iid innovations,
+using consistent finite time windows, and append \(E^*\).
+Let \(y_t(u)\) be the unique nonblank label found at a clean
+transverse position, or \(0\) if none exists. A clean live witness
+has a wholly clean successful provider, which supplies its same
+old center and every positive parent prescribed by its witness.
+Thus \(y_t\le y_{t-1}\) in deletion order. Time stationarity makes
+their nonblank probabilities equal, so they agree almost surely.
+Countability makes the extracted field time constant and
+\(H_{0,e}\)-fixed, with a fully \(\Z^2\)-TI law.
+On totality, source clause (i) makes it blank. Every nonblank
+vertex in every stationary TI noisy margin is therefore marked.
+
+Now take an arbitrary TI stationary canonical common-noise pair
+and augment both replicas by the same innovations and marks.
+A discrepancy is unflagged, since shared replacement gives equal
+letters. Distinct deterministic outputs require a discrepant
+parent. Each discrepancy has a nonblank margin, hence is marked.
+Tracing parents into the two-sided past would give an infinite
+marked nonflagged path, excluded by~\eqref{eq:marked-path}.
+The pair is diagonal. This is the arbitrary-pair quantifier in
+the usual stationary uniqueness argument made explicit.
+
+\emph{Separation on nontotality.}
+Source clause (ii) gives a positive-activity \(H_{0,e}\)-fixed
+reference law and also the blank reference law. Clone either
+reference constantly in \(P\). It is fixed by \(G_e\).
+Start the noisy field at its reference and the mark field in its
+stationary least law, independently of the reference. The closed
+relation
+\[
+ X_t(v)\ne\operatorname{Ref}(v)\ \Longrightarrow\ E_t(v)=1
+\]
+is preserved: at a clean site four wholly clean providers have
+the correct reference inputs, including when the reference is
+blank. Fixed-marginal Ces\`aro limits give stationary TI noisy
+lifts with this error domination.
+
+For fixed \(u\), the transverse mark field is mixing: approximate
+its indicator in \(L^1\) by a finite-past function of finitely many
+flags, whose distant translates are independent. Its transverse
+cube averages have variance tending to zero and mean \(p_*<1/2\).
+Let \(\delta_R\) be the probability that at least half the sites
+of the radius-\(R\) transverse cube are marked; then
+\(\delta_R\to0\). Strict majority decodes \(\operatorname{Ref}(u)\)
+except on this event. If the active reference has nonblank
+probability \(a_*>0\), the two noisy lifts have local decoded
+nonblank probabilities at least \(a_*-\delta_R\) and at most
+\(\delta_R\). Some finite \(R\) separates them. This observable
+is needed only to prove distinctness; the compiler uses the
+finite source table.
+\end{proof}
+
+\subsection{The simultaneous count reduction}
+One reduction family establishes hardness for every finite upper
+and lower threshold.
+\begin{maintheorem}[Phase-count completeness under \(C_T\)]\label{thm:completeness}
+Assume \(C_T\). At \(D=7\) and the single rate
+\(\eps_1=160000^{-101}\), in each input category separately,
+\(\{M:N(M)\le r\}\) is \(\Pi^0_2\)-complete for every finite
+\(r\ge1\), and \(\{M:N(M)\ge k\}\) is \(\Sigma^0_2\)-complete
+for every finite \(k\ge2\), under computable many-one reductions.
+One computable family has \(N=1\) on total programs and
+\(N=\frakc\) on nontotal programs.
+\end{maintheorem}
+\begin{proof}
+Run \(G_e\) independently in each seventh-coordinate slice,
+with the same rate \(\eps_1\), and call the result \(C_e\).
+On totality, a TI stationary common-noise pair restricts on each
+slice to such a pair for \(G_e\), hence to equal replicas by
+Lemma~\ref{lem:totality-controller}. Countably many slices make
+the full pair diagonal. Given any two TI stationary laws, evolve
+their product using common noise and take a Ces\`aro limit.
+The marginals stay fixed and the limit is a stationary TI pair.
+Diagonality equates its marginals. Existence follows from
+Lemma~\ref{lem:compact}, so \(N(C_e)=1\).
+
+On nontotality choose two distinct stationary TI slice laws
+\(\mu_0,\mu_1\), and a bounded real local \(h\) separating
+their means. For \(0\le p\le1\), put
+\[
+ \mu_p=(1-p)\mu_0+p\mu_1,\qquad
+ \nu_p=\bigotimes_{j\in\Z}\mu_p.
+\]
+These laws are stationary and fully TI. Translates of any local
+observable far enough apart along \(e_7\) depend on disjoint
+sets of independent slices. Their Ces\`aro average has variance
+tending to zero. A decomposition of \(\nu_p\) into two TI laws
+with distinct local means would give a positive lower bound on
+that variance. Thus \(\nu_p\) is extreme among all TI laws.
+The \(h\)-means distinguish continuum many \(p\), and
+Lemma~\ref{lem:compact} bounds their number by \(\frakc\).
+Hence
+\begin{equation}\label{eq:one-continuum}
+ \varphi_e\text{ total}\ \Longrightarrow\ N(C_e)=1,\qquad
+ \varphi_e\text{ nontotal}\ \Longrightarrow\ N(C_e)=\frakc.
+\end{equation}
+The classical range stays at most \(11\); the finite alphabet
+may depend on \(e\).
+
+The set \(\mathrm{TOT}=\{e:\forall n\ \exists s\
+[\varphi_e(n)\text{ halts by }s]\}\) is \(\Pi^0_2\)-complete.
+For a decidable relation \(R(a,n,t)\), compile a program on
+input \(n\) that searches for a \(t\) satisfying \(R(a,n,t)\).
+It is total exactly when \(\forall n\,\exists t\,R(a,n,t)\).
+Complementation gives \(\Sigma^0_2\)-completeness of
+\(\overline{\mathrm{TOT}}\). Equation~\eqref{eq:one-continuum}
+reduces \(\mathrm{TOT}\) to every finite upper cut \(N\le r\),
+and its complement to every lower cut \(N\ge k\), \(k\ge2\).
+The unconditional upper bounds of Theorem~\ref{thm:counts}
+give the matching membership statements.
+
+For quantum inputs, implement \(C_e\) by the
+dephase/copy/lookup/prepare circuit of
+Section~\ref{sec:preservation}, followed by whole-site
+depolarization at \(\eps_1\). Every finite output block is
+basis diagonal after one round. Thus every stationary quantum
+state is diagonal, and its stationary TI set is affinely exactly
+the classical one. Equation~\eqref{eq:one-continuum} holds for
+the entire TI stationary quantum set. Theorem~\ref{thm:counts} also
+gives quantum membership. On the quantum presentation promise,
+membership means a total arithmetic formula agrees on valid
+inputs; every reduction here outputs a valid exact circuit.
+\end{proof}
+
+\subsection{Stationary preservation from diagonal couplings}
+For the general stationary Rice clause, discard the \(E\) coordinate:
+\[
+ \sigma_{\mathrm{stat}}=(N,N_{\ord},N_{\Br},L),\qquad
+ \sigma_{\mathrm{stat},\infty}=(\frakc,\frakc,\frakc,\mathrm{true}).
+\]
+
+\begin{proposition}\label{prop:stationary-diagonal}
+At any common rate, coupling a host to a deterministic TI
+controller followed by uniform replacement and having the
+diagonal-coupling property, using one whole-pair replacement,
+preserves \(\sigma_{\mathrm{stat}}\), in both categories.
+Host projection is an affine homeomorphism of TI stationary sets
+and preserves \(\ell\) and every \(b_q\) per state.
+\end{proposition}
+\begin{proof}
+The controller has a unique TI stationary law \(\varpi\), by the
+fixed-marginal Ces\`aro argument above. Start its common-noise
+pair from \((\varpi,\mathbf0)\), and let \(d_m\) be the one-site
+disagreement after \(m\) rounds. Every subsequential Ces\`aro
+pair limit is TI stationary and diagonal. Since disagreement
+is a cylinder event,
+\[
+ \frac1T\sum_{m<T}d_m\longrightarrow0.
+\]
+Otherwise a compactness limit would have positive disagreement.
+Choose an unbounded subsequence \(m_j\) with \(d_{m_j}\to0\).
+
+Every TI stationary host state \(\mu\) has a stationary joint
+lift. In any such lift \(\zeta\), the controller marginal is
+\(\varpi\). Retain its host start and future innovations, but
+reset the comparison controller to \(\mathbf0\).
+The controller pair has exactly the law started from
+\((\varpi,\mathbf0)\), regardless of initial host correlations.
+For the finite-past comparison \(W_m(\mu)\) this gives
+\begin{equation}\label{eq:stationary-reset}
+ d_O(\zeta,W_m(\mu))\le |O_C|d_m.
+\end{equation}
+Along \(m_j\), all stationary lifts of \(\mu\) agree.
+The continuous affine onto projection is therefore an affine
+homeomorphism and bijects the full extreme sets.
+
+Quantumly, a stationary joint state is diagonal on the
+measure-and-prepare controller. On a finite input cone write it
+as
+\(\sum_c\rho_H^c\otimes|c\rangle\langle c|\), with positive
+subnormalized host matrices and traces given by the
+\(\varpi\)-marginal. At fixed innovations the channel factors
+between tracks. The actual and reset outputs have the same host
+images of \(\rho_H^c\); their normalized trace distance is at
+most the total weight of strings whose controller outputs differ
+on \(O_C\). Averaging gives exactly the classical mismatch
+bound \(|O_C|d_m\). This proves~\eqref{eq:stationary-reset}
+also with initially entangled host data.
+
+For joint observables \(f,g\), let \(r\) bound the number of
+controller sites in either support. The covariance error in
+\eqref{eq:covariance-error} is now at most
+\(8\|f\|\|g\|r d_m\). At fixed \(m\), distant finite cones
+factor through local host observables \(G_m^f,G_m^g\);
+quantumly the factorization follows from the independent
+product environments. If the host state lacks \(\ell\), send
+separation to infinity and then \(m=m_j\to\infty\) to exclude
+it in the lift. Host observables give the converse.
+For each \(q\ne0\), expand the weighted second moment:
+only \(O_m(|B_n|)\) pairs have intersecting cones, and the
+remaining products are host products. The stationary/reset
+error is bounded uniformly in \(n\) by \(8\|f\|^2r d_m\).
+First \(n\to\infty\), then \(m=m_j\to\infty\), preserves
+each \(b_q\), exactly as in Proposition~\ref{prop:preservation}.
+Thus \(N_{\ord},N_{\Br}\) and \(L\) are preserved as well.
+\end{proof}
+
+This proposition controls stationary controller marginals; its
+conclusion concerns \(\sigma_{\mathrm{stat}}\), excluding
+all-law ergodicity. A constant bath sharing the replacement
+flags is a trivial diagonal-coupling controller: replicas agree
+after one step. Its invariance follows from this proposition.
+The product lift \(\mu\otimes\omega_{\mathrm B}\) in
+Proposition~\ref{prop:bath} refers to a bath with independent
+noise in the comparison universe.
+
+\subsection{The stationary Rice degrees}
+\begin{theorem}[Stationary Rice degrees under \(C_T\)]\label{thm:stationary-degrees}
+Assume \(C_T\), \(D=7\) and rate \(\eps_1\). In each input
+category, every nontrivial predicate \(P\) of
+\(\sigma_{\mathrm{stat}}\) is \(\Pi^0_2\)-hard if it is false
+at \(\sigma_{\mathrm{stat},\infty}\), and \(\Sigma^0_2\)-hard
+if it is true there. There is no nontrivial
+\(\Delta^0_2\) predicate of this datum. If such a predicate
+separately belongs to \(\Pi^0_2\), or to \(\Sigma^0_2\), it is
+complete for that class.
+\end{theorem}
+\begin{proof}
+Pair two copies of \(G_e\), slice in the seventh direction,
+and apply the parity conjugacy~\eqref{eq:gauge}, all at
+\(\eps_1\). Denote the resulting controller by \(Q_e\).
+On totality the diagonal-coupling property survives slicing
+and pairing, by restriction to slices and to corresponding
+registers of the two replicas. For parity conjugacy, pull back
+a fully TI stationary pair through \(T\) in both replicas.
+The pulled-back law is stationary, invariant under even
+translations, and each odd translation acts on it by the global
+swap in both replicas. Averaging it with its swap image makes
+it fully TI, hence diagonal by the ungauged property.
+Each component of this positive average is diagonal, so the
+original pair is diagonal. Proposition~\ref{prop:stationary-diagonal}
+therefore preserves every host's \(\sigma_{\mathrm{stat}}\).
+
+On nontotality, let \(h\) be any real local separator of the
+two stationary slice laws, with mean gap \(\delta>0\).
+Fixed-marginal Ces\`aro averaging gives a paired joining
+\(\xi_{10}\); let \(\xi_{01}\) be its swap. Set
+\[
+ \xi_p=(1-p)\xi_{10}+p\xi_{01},\quad
+ g=h(\text{first})-h(\text{second}),\quad
+ \delta_p=(1-2p)\delta,\quad 0<p<\tfrac12.
+\]
+Use iid \(\xi_p\) slices and average the two parity-conjugate
+components as in Proposition~\ref{prop:crystal}. For every local
+observable the component cube-average variance is \(O(1/n)\),
+because only \(O(|B_n|^2/n)\) pairs share a slice. Their parity
+means average to the same limit. Mixture variance therefore
+proves that the TI average \(\rho_p\) is extreme among all TI
+laws, and among all TI quantum states in its diagonal realization.
+
+Here \(g\) may read several sites inside one slice. Use the
+local observable \(f=T^*g\), anchored at the origin. Swap
+oddness gives
+\[
+ T^*\tau_x(T^*g)=(-1)^{\sum_i x_i}\tau_xg.
+\]
+The staggered component means are \(\delta_p\) and
+\(-\delta_p\), so the \(q_\pi\) Bragg moment is at least
+\(\delta_p^2\). Moreover
+\(\rho_p(f\tau_{2e_7}f)=\delta_p^2\); independence of the two
+whole slices proves this identity and distinguishes continuum
+many \(p\). Thus \(Q_e\) has continuum many Bragg-ordered
+extreme TI stationary states.
+
+Write \(H\boxdot Q_e\) for the product of the host and controller
+updates followed by one whole-pair replacement.
+For every host \(H\), projection of its stationary set onto
+the controller is onto.
+The fiber over each extreme \(\rho_p\) is a compact face and
+has an extreme joint lift by Lemma~\ref{lem:compact}.
+The lift retains the controller Bragg moment. By
+Lemma~\ref{lem:two-order} and the continuum upper bound, every
+nontotal product has datum \(\sigma_{\mathrm{stat},\infty}\).
+Total products have datum \(\sigma_{\mathrm{stat}}(H)\).
+The quantum assertions follow from the same diagonal controller
+and the trace-distance argument just proved.
+
+A known nontotal program realizes
+\(\sigma_{\mathrm{stat},\infty}\). Nontriviality supplies a
+finite valid host \(H\) with the opposite verdict; fix it.
+The computable map \(e\mapsto H\boxdot Q_e\) reduces
+\(\mathrm{TOT}\) to \(P\) when its universal verdict is false,
+and \(\overline{\mathrm{TOT}}\) to \(P\) when it is true.
+Only finite tables and circuits enter this map.
+
+For completeness, hierarchy strictness forces the matching
+orientations. The relation
+\[
+ V(e,x)\iff\forall n\ \exists s\
+ [\text{program }e\text{ on }(x,n)\text{ halts by }s]
+\]
+is universal for \(\Pi^0_2\). Its diagonal complement
+\(\neg V(x,x)\) is \(\Sigma^0_2\) and cannot be \(\Pi^0_2\):
+an index \(d\) for such a definition would give
+\(\neg V(d,d)=V(d,d)\). Hence \(\mathrm{TOT}\notin\Sigma^0_2\)
+and \(\overline{\mathrm{TOT}}\notin\Pi^0_2\).
+A \(\Pi^0_2\) predicate with true universal verdict would
+place \(\overline{\mathrm{TOT}}\) in \(\Pi^0_2\), a contradiction.
+It must have false verdict and is \(\Pi^0_2\)-complete.
+The dual statement holds for \(\Sigma^0_2\); belonging to both
+classes is impossible for a nontrivial predicate.
+On the quantum promise domain these preimages are ordinary
+arithmetic predicates because every output presentation is valid.
+\end{proof}
+
+The concrete complete predicates established here are the total-count
+cuts of Theorem~\ref{thm:completeness}. For \(N_{\ord},N_{\Br}\)
+and \(L\), the general clause supplies one-sided hardness and the
+absence of nontrivial \(\Delta^0_2\) members; an arithmetic upper
+bound would be needed to invoke its matching-completeness clause.
+Exact \(N=k\), \(k\ge2\), is \(\Pi^0_2\)-hard if realized and
+has the unconditional \(D_2(\Sigma^0_2)\) upper bound, while
+realizability remains open. Finite and infinite total count retain
+their \(\Sigma^0_3\) and \(\Pi^0_3\) upper bounds.

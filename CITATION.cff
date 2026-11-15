@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: Please cite the paper; this repository supplies its source.
+type: software
+title: "A Rice theorem for stationary states under fixed noise"
+version: 1.0.0
+date-released: '2026-11-14'
+license: [CC-BY-4.0, MIT, Apache-2.0]
+authors: [{"family-names": "Douglas", "given-names": "Seth", "orcid": "https://orcid.org/0009-0007-4708-3252"}, {"family-names": "Mghirbi", "given-names": "Nidhal", "orcid": "https://orcid.org/0009-0005-6534-1118"}]
+keywords: ["probabilistic cellular automata", "stationary states", "undecidability", "Rice theorem", "Bragg order", "local quantum channels", "arithmetical hierarchy"]
+abstract: "Which macroscopic questions about a noisy lattice can an algorithm decide from its local rule? Fix dimension seven and one positive rational replacement rate. Every nontrivial property determined by the number of extreme translation-invariant stationary laws, all-law ergodicity, and the existence of a translation-invariant stationary law with nondecaying local covariance is undecidable. A stronger theorem retains the numbers of extreme translation-invariant stationary states with nondecaying covariance and with a Bragg atom at some nonzero wavevector. The same statements hold for finite-depth circuits of local quantum channels with fresh product ancillas, followed by whole-site depolarization. Under a stated published-source condition C_T, at another fixed rational rate the total-count cuts 'at most r' and 'at least k' are respectively Π⁰₂-complete for every r ≥ 1 and Σ⁰₂-complete for every k ≥ 2, in both categories. The scope has a decidable boundary: a classical translation-invariant stationary law attains the noise entropy floor exactly when the deterministic rule is constant."

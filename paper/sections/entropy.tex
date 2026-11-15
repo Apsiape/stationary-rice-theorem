@@ -1,0 +1,75 @@
+\section{A decidable stationary entropy boundary}\label{sec:entropy}
+The next criterion explains why a Rice theorem cannot encompass every stationary property. Entropy methods for noisy CA have a broader history in \cite{MST19,marcovici-taati}.
+
+\begin{theorem}[Classical entropy floor]\label{thm:entropy-classical}
+In any dimension $D\ge1$, for a $Q$-symbol deterministic finite-range TI rule followed by uniform replacement at $0<\eps<1$, put
+\begin{equation}\label{eq:bath-entropy}
+ \beta=\eps/Q,\qquad \alpha=1-\eps+\beta,\qquad
+ h_{\mathrm{bath}}=-\alpha\log\alpha-(Q-1)\beta\log\beta.
+\end{equation}
+Some TI stationary law has spatial Shannon entropy density $h_{\mathrm{bath}}$ if and only if the deterministic rule is constant. For a nonconstant rule every such law has an explicit strictly positive entropy-density surplus. Consequently entropy-floor attainment is decidable by a finite table scan.
+\end{theorem}
+\begin{proof}
+For a TI law $\mu$, subadditivity of finite Shannon entropy proves existence of
+\[
+ h(\mu)=\lim_n\frac{H_\mu(X_{B_n})}{|B_n|}
+       =\inf_n\frac{H_\mu(X_{B_n})}{|B_n|}.
+\]
+To verify this, tile a large cube by fixed $k$-cubes plus a remainder of vanishing density. Subadditivity and TI bound the limsup by the $k$-cube ratio; the liminf is at least the infimum of all ratios. The remainder costs at most $\log Q$ per site.
+
+Every replacement row $r_a=\beta\one+(1-\eps)e_a$ has entropy $h_{\mathrm{bath}}$. Conditional on the pre-noise field, outputs are independent rows of this form. Removing conditioning gives
+$H(X_{B_n})\ge|B_n|h_{\mathrm{bath}}$ after one round, so every stationary entropy density is at least the floor. A constant rule sends every initial law in one round to an iid row law and attains it. The one-symbol and empty-stencil cases are constant and immediate.
+
+Suppose the rule on the nonempty stencil $\mathcal N$ is nonconstant. Choose input words giving different output symbols $a,b$, and set
+\[
+ \upsilon=\beta^{|\mathcal N|},\qquad
+ \Delta_h=2\upsilon\left[H\left(\frac{r_a+r_b}{2}\right)-h_{\mathrm{bath}}\right]>0.
+\]
+Strict concavity gives positivity. Any output-row mixture assigning weights at least $\upsilon$ to $r_a$ and $r_b$ has entropy at least $h_{\mathrm{bath}}+\Delta_h$: split off weight $2\upsilon$ with the displayed half-mixture, and apply concavity to the remaining row mixture. This also covers $2\upsilon=1$.
+
+Start from any stationary TI law and run two rounds $X^0\to X^1\to Y$. Condition on the entire field $Z=F(X^0)$ before the first replacement layer. Given $Z$, the $X^1$ sites are independent and each symbol has probability at least $\beta$. Every chosen $\mathcal N$-word therefore has conditional probability at least $\upsilon$. The preceding strict-concavity estimate gives
+\[
+ H(Y_v\mid Z)\ge h_{\mathrm{bath}}+\Delta_h.
+\]
+Choose an integer $s$ larger than every coordinate span of $\mathcal N$. For $\Lambda_{\mathrm{sparse}}=\Lambda\cap s\Z^D$, the input neighborhoods are disjoint, so the $Y_v$, $v\in \Lambda_{\mathrm{sparse}}$, are conditionally independent given $Z$. Use these sites first in the entropy chain rule. For the other sites condition further on $X^1$; their fresh final noises remain independent of $Y_{\Lambda_{\mathrm{sparse}}}$ and give exactly $h_{\mathrm{bath}}$ per site. Thus
+\begin{align*}
+ H(Y_\Lambda)&\ge H(Y_\Lambda\mid Z)\\
+ &\ge |\Lambda_{\mathrm{sparse}}|(h_{\mathrm{bath}}+\Delta_h)
+       +|\Lambda\setminus \Lambda_{\mathrm{sparse}}|h_{\mathrm{bath}}.
+\end{align*}
+Stationarity and cube limits imply
+\[
+ h(\mu)\ge h_{\mathrm{bath}}+\Delta_h/s^D>h_{\mathrm{bath}}.
+\]
+This holds uniformly over all TI stationary laws of the given nonconstant rule. The finite criterion follows without computing logarithms or stationary laws.
+\end{proof}
+
+\begin{theorem}[Quantum one-site entropy floor]\label{thm:entropy-quantum}
+For a valid exact local quantum circuit with final whole-site depolarization at $0<\eps<1$, some TI stationary state attains the one-site von Neumann entropy floor \eqref{eq:bath-entropy}, with $Q=d$, if and only if the pre-noise one-site output map is constant pure preparation. Finite exact matrix equality and rank tests decide this property.
+\end{theorem}
+\begin{proof}
+Let $\Psi$ be the CPTP map from its finite input cone $\mathcal N$ to the one-site output before final noise, with ancillas evaluated. In a stationary state the preceding final noise gives
+\[
+ \rho_{\mathcal N}\ge (\eps/d)^{|\mathcal N|}I_{\mathcal N},
+\]
+since one positive branch resets all sites in that region. If $\lambda_i$ are the eigenvalues of $\Psi(\rho_{\mathcal N})$, the final eigenvalues are $\eps/d+(1-\eps)\lambda_i$. Strict concavity on the probability simplex shows that their entropy is minimized exactly at a pure pre-noise state.
+
+Suppose $\Psi(\rho_{\mathcal N})=P$ is rank one and $\rho_{\mathcal N}\ge cI$. Positivity gives $0\le c\Psi(I)\le P$. For every positive $A$, the inequality $\Psi(A)\le\|A\|\Psi(I)$ puts its range in the same rank-one space. Trace preservation forces $\Psi(A)=\Tr(A)P$, hence by linearity this identity holds on all matrices. Conversely, constant pure one-site output maps force every finite pre-noise output to be the product pure state: a state with each marginal supported on a rank-one projector is supported on their tensor product. Final noise therefore gives an iid bath state, stationary and at the floor.
+
+The finite circuit computes the algebraic matrix of $\Psi$. With input dimension $d_{\mathcal N}=d^{|\mathcal N|}$ and $\theta=\Psi(I/d_{\mathcal N})$, check
+\[
+ \Psi(|i\rangle\langle j|)=\delta_{ij}\theta\quad\text{for all matrix units},
+ \qquad \operatorname{rank}(\theta)=1.
+\]
+These are exact algebraic equality and rank tests. They decide the property on every valid input.
+\end{proof}
+
+\begin{proposition}[The boundary lies outside the Rice class]\label{prop:boundary}
+At the parameters of Theorem~\ref{thm:refined}, entropy-floor attainment is nontrivial and decidable in each category but is not a function of $\sigma$.
+\end{proposition}
+\begin{proof}
+Use binary constant reset and binary noisy identity. Reset attains the appropriate floor. Under noisy identity, the probability that some site of a finite observed region $O$ has not yet been refreshed by time $t$ is at most $|O|(1-\eps_0)^t$. On the other branches the observed law or density matrix is maximally mixed. Thus identity converges locally to the unique uniform iid state, even from spatially correlated or entangled starts. Reset and identity both have
+$\sigma=(1,0,0,\mathrm{true},\mathrm{false})$, whereas identity's entropy is $\log2>h_{\mathrm{bath}}$. Their opposite floor verdicts prove the assertion.
+\end{proof}
+
+The classical floor property is invariant under relabeling and under adding a shared-flag constant bath: the product deterministic rule is constant exactly when the host rule is constant. For independent baths the same holds if the entropy floor is taken per track. An ambient whole-alphabet floor uses a different noise convention. Thus bath neutrality by itself does not substitute for dependence on the stationary datum. The boundary example identifies a limitation of this Rice class, rather than a maximality assertion about all possible classes. The floor predicate also escapes the reduction for a transparent reason: a host coupled to a nonconstant controller has a nonconstant product rule, so the forgetting branch does not preserve floor attainment.

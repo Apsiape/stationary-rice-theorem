@@ -1,0 +1,31 @@
+{
+  "title": "A Rice theorem for stationary states under fixed noise",
+  "upload_type": "publication",
+  "publication_type": "preprint",
+  "version": "1.0.0",
+  "publication_date": "2026-11-14",
+  "creators": [
+    {
+      "name": "Douglas, Seth",
+      "orcid": "0009-0007-4708-3252"
+    },
+    {
+      "name": "Mghirbi, Nidhal",
+      "orcid": "0009-0005-6534-1118"
+    }
+  ],
+  "description": "Which macroscopic questions about a noisy lattice can an algorithm decide from its local rule? Fix dimension seven and one positive rational replacement rate. Every nontrivial property determined by the number of extreme translation-invariant stationary laws, all-law ergodicity, and the existence of a translation-invariant stationary law with nondecaying local covariance is undecidable. A stronger theorem retains the numbers of extreme translation-invariant stationary states with nondecaying covariance and with a Bragg atom at some nonzero wavevector. The same statements hold for finite-depth circuits of local quantum channels with fresh product ancillas, followed by whole-site depolarization. Under a stated published-source condition C_T, at another fixed rational rate the total-count cuts \"at most r\" and \"at least k\" are respectively Π⁰₂-complete for every r ≥ 1 and Σ⁰₂-complete for every k ≥ 2, in both categories. The scope has a decidable boundary: a classical translation-invariant stationary law attains the noise entropy floor exactly when the deterministic rule is constant.",
+  "keywords": [
+    "probabilistic cellular automata",
+    "stationary states",
+    "undecidability",
+    "Rice theorem",
+    "Bragg order",
+    "local quantum channels",
+    "arithmetical hierarchy"
+  ],
+  "access_right": "open",
+  "license": "cc-by-4.0",
+  "language": "eng",
+  "notes": "Preprint. It has not been peer reviewed. The authors have not independently verified the mathematical arguments; the paper's section 'How this work was done' describes the model-based construction and the cross-family checks. Theorem C is conditional on the stated source condition C_T. Not formalized in Lean. Text: CC BY 4.0. Script: MIT or Apache 2.0."
+}

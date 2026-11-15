@@ -1,0 +1,164 @@
+\section{Effective bounds on the total extreme count}\label{sec:counts}
+
+Finite local stationarity constraints give upper bounds on the
+arithmetical complexity of counting extreme translation-invariant stationary states.
+The argument applies to rational classical PCA and algebraically
+presented local quantum circuits.
+
+\begin{theorem}\label{thm:counts}
+Uniformly on valid finite presentations, for every fixed integer
+\(r\ge1\), the condition \(N\le r\) is \(\Pi^0_2\).
+Consequently \(N\ge k\) is \(\Sigma^0_2\) for \(k\ge2\), and
+\(N=1\) is \(\Pi^0_2\).  For \(k\ge2\), the condition \(N=k\)
+belongs to \(D_2(\Sigma^0_2)\subseteq\Delta^0_3\).
+Finite total extreme count is \(\Sigma^0_3\), and infinite total
+extreme count is \(\Pi^0_3\).
+\end{theorem}
+
+Here \(D_2(\Sigma^0_2)\) denotes differences of two
+\(\Sigma^0_2\) sets.  All the assertions are upper bounds on the
+total count \(N\).
+
+\begin{proof}
+\emph{Linear descriptions of the stationary set.}
+Choose an effective countable determining family of real local
+coordinates \(x_1,x_2,\ldots\), each bounded in absolute value by
+one.  Classically use cylinder probabilities.  Quantumly use real
+and imaginary entries of finite-region density matrices, with
+Hermiticity built into the coordinates.  A state is specified by
+countably many linear equalities and inequalities: normalization,
+consistency under restriction, translation invariance, stationarity
+and positivity.  Classical positivity is entrywise nonnegativity.
+For a finite quantum region \(\Lambda\), impose
+\[
+ v^*\rho_{\Lambda}v\ge0\qquad
+ \text{for every vector }v\text{ with rational real and imaginary parts}.
+\]
+Each is a linear inequality in the chosen real coordinates.  Density
+of these vectors makes the countable family equivalent to positive
+semidefiniteness of \(\rho_{\Lambda}\).  Stationarity on a local Hermitian
+basis has exact algebraic coefficients, computed from the finite
+backward circuit.  Thus all constraints can be enumerated effectively
+and their coefficients admit exact arithmetic and order tests.
+
+Let \(b(m)\ge m\) increase so that the first \(m\) constraints use
+only the first \(b(m)\) coordinates.  In those coordinates let
+\(P_m\) be the bounded algebraic polytope defined by the first
+\(m\) constraints and the coordinate bounds \([-1,1]\).
+Choose the enumeration so every earlier constraint is retained.
+The restriction of every genuine stationary state belongs to every
+\(P_m\), so these polytopes are nonempty.  Conversely, if
+\(m_j\to\infty\) and points of \(P_{m_j}\), extended arbitrarily
+in the unused bounded coordinates, converge coordinatewise, their
+limit satisfies every constraint.  It is therefore a genuine
+translation-invariant stationary law or state.
+
+Write \(\mathcal X=\cK(M)\).  For every fixed \(n\), the first-\(n\)
+coordinate projections of \(P_m\) converge in Hausdorff distance to
+the corresponding projection of \(\mathcal X\).  Indeed, a sequence of
+outer points staying a positive distance away would have a
+coordinatewise convergent subsequence, whose limit would belong to
+\(\mathcal X\).  Genuine points are contained at every stage.  
+
+\emph{Finite decidable approximation tests.}
+The vertices of each \(P_m\) are computable with exact algebraic
+arithmetic.  Enumerate full-rank systems of active constraints,
+solve their linear equations and check all inequalities.  This also
+covers lower-dimensional polytopes: if the active normals at a
+vertex failed to span the ambient coordinate space, a small segment
+in a common null direction would remain feasible.  Every bounded
+polytope is the convex hull of its vertices, as follows by expressing
+an interior point on a boundary-to-boundary segment and inducting on
+face dimension.  Finite algebraic linear feasibility is consequently
+decidable by the same finite linear-algebra operations.
+
+For \(m\ge n\), put \(\eta=2^{-n}\), and let \(V\ge1\) be the
+number of vertices of \(P_m\).  Choose an integer
+\(L_{m,n}\ge8V/\eta\).  Let \(\cQ_{m,n}\) contain all convex
+combinations of these vertices with nonnegative weights in
+multiples of \(1/L_{m,n}\).  It is a finite subset of \(P_m\).
+It is an \(\eta/4\)-net in the first \(n\) coordinates: round
+the first \(V-1\) weights down to multiples of \(1/L_{m,n}\), putting
+the remainder on the last vertex.  The sum of absolute weight
+errors is at most \(2(V-1)/L_{m,n}\), so each coordinate error is at most
+\(\eta/4\).  The case \(V=1\) is immediate.
+
+Define the finite test \(\mathsf{Test}_r(n,m)\) to hold if some \(r\)-tuple
+of points in \(\cQ_{m,n}\), with repetitions allowed, has the
+following property: every vertex of \(P_m\) is within \(\eta\),
+in first-\(n\) coordinate maximum norm, of that tuple's convex
+hull.  For a fixed tuple and vertex \(v\), the test is feasibility
+of
+\[
+ \lambda_i\ge0,\qquad \sum_{i=1}^r\lambda_i=1,\qquad
+ \left|v_j-\sum_{i=1}^r\lambda_i y_{i,j}\right|\le\eta
+ \quad(1\le j\le n).
+\]
+This is a finite algebraic linear-feasibility problem.  Define the test to be false on malformed or empty stage data.
+Enumerating the finitely many tuples makes \(\mathsf{Test}_r(n,m)\) decidable.  Covering
+the vertices also covers \(P_m\), since the sum of a convex hull
+and a maximum-norm ball is convex.
+
+\emph{The quantifier characterization.}
+We claim that
+\begin{equation}\label{eq:finite-count-formula}
+ N\le r
+ \quad\Longleftrightarrow\quad
+ \forall n\ge1\ \exists m\ge n:\ \mathsf{Test}_r(n,m).
+\end{equation}
+First recall why a compact convex set with finitely many extreme
+points is their convex hull in this setting.  Suppose a point of
+\(\mathcal X\) lies outside the hull of the alleged finite list.  Compactness
+of the coefficient simplex gives a finite coordinate projection
+in which it still lies outside that hull.  Finite-dimensional
+separation then supplies a local linear functional whose maximum
+on \(\mathcal X\) exceeds its maximum on the list.  Its maximizing compact
+face is disjoint from the hull.  Successively maximizing a
+countable determining coordinate family inside that face leaves a
+singleton intersection.  This point is extreme in \(\mathcal X\),
+contradicting completeness of the list.
+
+If \(N\le r\), choose \(r\) generators of \(\mathcal X\), repeating
+points when necessary.  At fixed \(n\), choose \(m\ge n\) so
+large that the first-\(n\) projection of \(P_m\) lies within
+\(\eta/4\) of that of \(\mathcal X\).  Approximate the \(r\) generators
+by points of \(\cQ_{m,n}\) within \(\eta/4\) in those
+coordinates.  Their hull then covers the projected \(P_m\) within
+\(\eta/2\), so \(\mathsf{Test}_r(n,m)\) holds.
+
+Conversely, choose stages \(m_n\ge n\) and successful centers
+\(y_1^{(n)},\ldots,y_r^{(n)}\in P_{m_n}\).
+After extending unused coordinates in \([-1,1]\), simultaneous
+product compactness gives a subsequence along which every center
+converges coordinatewise to a fixed point \(y_i\in \mathcal X\).
+Membership in \(\mathcal X\) follows because \(m_n\ge n\to\infty\).
+Now fix any \(x\in \mathcal X\).  Its restriction lies in each relevant
+\(P_{m_n}\), so vertex coverage supplies simplex coefficients
+\(\lambda_i^{(n)}\) approximating its first \(n\) coordinates
+within \(2^{-n}\).  A further subsequence makes these coefficients
+converge.  Passing to each fixed coordinate yields
+\[
+ x=\sum_{i=1}^r\lambda_i y_i.
+\]
+The limiting centers were chosen before \(x\); only the
+coefficients depend on it.  Hence \(\mathcal X\) is the convex hull of
+these same \(r\) points and has at most \(r\) extreme points.
+This proves~\eqref{eq:finite-count-formula}.
+
+The right side is a universal-existential formula with decidable
+matrix, proving the \(\Pi^0_2\) bound.  Its complement gives
+\(N\ge k\in\Sigma^0_2\) for \(k\ge2\).  Since \(\mathcal X\) is
+nonempty compact convex, it has an extreme point, so \(N=1\) is
+already the case \(N\le1\).  For \(k\ge2\), write
+\[
+ \{N=k\}=\{N\ge k\}\setminus\{N\ge k+1\}.
+\]
+This gives \(D_2(\Sigma^0_2)\), contained in \(\Delta^0_3\).
+Finally, prefixing~\eqref{eq:finite-count-formula} with an
+existential integer \(r\) makes finite total count \(\Sigma^0_3\);
+its complement is \(\Pi^0_3\).
+\end{proof}
+
+
+
+
