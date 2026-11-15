@@ -1,6 +1,6 @@
 # A Rice theorem for stationary states under fixed noise
 
-Seth Douglas and Nidhal Mghirbi. Version 1.0.0, November 2026.
+Seth Douglas and Nidhal Mghirbi. Version 1.0.0, November 2026. DOI for all versions: [10.5281/zenodo.24241163](https://doi.org/10.5281/zenodo.24241163); version 1.0.0: [10.5281/zenodo.24241164](https://doi.org/10.5281/zenodo.24241164).
 
 **This is a preprint. It has not been peer reviewed. The authors have not independently verified the mathematical arguments; see "How it was checked" below.**
 
