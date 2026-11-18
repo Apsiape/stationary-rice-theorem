@@ -1,0 +1,143 @@
+\section{The quantum controller with noise after every layer}\label{sec:line-quantum}
+\begin{lemma}[Encoded native updates and independent marks]\label{lem:line-qmarks}
+At rate $e$ of \eqref{eq:line-rate}, for every $n$ and host period
+$J\ge2$ one can effectively construct a quantum controller with exactly
+$J$ noisy layers per round. It performs $s=\lfloor J/2\rfloor\ge1$
+native steps per round. Its effective classical update equals $f_n$
+off a common iid dominating set of marks of probability at most $e$,
+and with innovations fixed it is a deterministic function of its
+three previous effective symbols on every update, including marked ones.
+\end{lemma}
+\begin{proof}
+Let $b=\max(1,\lceil\log_2|\mathsf A_n|\rceil)$ and choose an
+injective $b$-bit code of the native alphabet. Decode unused words
+as the unique empty letter. Repeat each bit on $m$ wires, where $m$
+is the least odd positive integer with $4b2^{-m}\le e$, and decode
+by majority. A finite basis measurement and preparation is an exact
+local CPTP gate: enumerate its finite input-output table to obtain
+algebraic Kraus matrices. This is legal in the arbitrary finite-arity
+channel category, without a noisy bounded-arity compilation claim.
+
+Use two layers per native step. In the fanout layer, one on-site
+trace/measure-and-prepare gate decodes the center and prepares three
+repetition-encoded copies for destinations $x-1,x,x+1$, discarding
+all old contents. The zero-offset port is the center bundle itself:
+each lane has exactly three $bm$-wire words per site, center, left
+port and right port. In the lookup layer, the gate at destination
+$y$ consumes its three dedicated incoming words, decodes them,
+applies $f_n$, writes the encoded result into the center at $y$,
+and prepares zeros on the other two consumed words. Every port is
+used once. The lookup gates have spatial diameter two and act on
+disjoint internal registers, even where their sites overlap.
+Use $s$ pairs of layers, with the possible one remaining idle layer
+immediately after the final lookup. Noise acts on every wire after
+all these layers, including fanout, lookup and idle. All auxiliaries
+are included in the physical site space.
+
+At a pre-fanout boundary the effective letter is the decoded center.
+Resolve a depolarization of a basis wire into identity with probability
+$1-e$ and replacement by a fresh fair bit with probability $e$.
+For each logical destination and step, mark if at least half the
+wires were touched in any of its $3b$ received bit bundles after
+fanout, or in any of its $b$ output-center bundles after lookup or
+the following idle. Add independent dummy idle flags on shorter
+steps only to the bounding event. Each wire then has touch probability
+at most $2e$. Different destination/step pairs use disjoint wire-time
+samples: incoming ports have dedicated wires, and a center's
+post-lookup noise and next post-fanout noise are different samples.
+Thus, after dummy flags, the bounding events are independent across
+destination/step pairs and identically distributed, each of probability
+at most $e$; they contain every deviation of the effective update.
+Indeed the per-bundle binomial bound is
+\[
+ \Pr\{\text{at least }m/2\text{ touched wires}\}
+ \le2^m(2e)^{m/2}\le2^{-m},
+\]
+since $e\le1/32$. The union over $4b$ bundles gives the claimed rate.
+Independent extra marks can enlarge it to exactly $e$ if desired.
+On an unmarked update all majorities are correct, hence the output
+is exactly $f_n$ on the three old effective symbols. On a marked
+update the fanout has already discarded all raw input except those
+three decoded symbols. With all innovations fixed the output is
+still a deterministic function of those symbols. This checks both
+the arbitrary-deviation hypothesis in Lemma~\ref{lem:line-decoder}
+and the parent-dependence hypothesis in Lemma~\ref{lem:line-forget}.
+The estimates charge majority failures, not the occurrence of any
+reset somewhere in a growing native word.
+\end{proof}
+
+\begin{lemma}[The entire physical controller]\label{lem:line-physical}
+Every stationary quantum controller state is diagonal at the observed
+round boundary. In the halting case the common-map forgetting of
+Lemma~\ref{lem:line-forget} holds for the full physical register,
+with a finite enlargement of the observed support. It applies to
+arbitrary entangled initial states. In the nonhalting case the full
+controller has the stationary states of Proposition~\ref{prop:line-phases}.
+\end{lemma}
+\begin{proof}
+The first fanout measures or discards every controller wire.
+All later preparations, lookups and depolarizations keep outputs
+basis diagonal, including at whole-round boundaries. A stationary
+state is consequently a classical boundary law. For fixed innovations,
+equality of the three effective parents at the last step gives equality
+of its complete raw center output and subsequent corrupted bits.
+Both noncenter words have been overwritten by constants in lookup
+and subsequently see only fresh noise. Thus an enlargement of a
+finite support by the radius-one parents at the preceding step
+suffices to determine the full raw output there. There are at least
+$s\ge1$ logical steps per round and at most a one-step initial delay.
+Lemma~\ref{lem:line-forget} and a finite union bound give full-register
+forgetting on halting.
+
+At channel level, on every input including entangled ones,
+\[
+ \cD^{(1)}_e=(1-e)\operatorname{id}
+    +\frac e2|0\rangle\langle0|\Tr
+    +\frac e2|1\rangle\langle1|\Tr.
+\]
+The controller channel over finitely many rounds is therefore a
+convex combination, over innovations, of a deterministic classical
+map after basis measurement of centers and tracing out ports.
+On a good common-map branch its reduced map on the observed output
+is $X\mapsto\Tr(X)|c\rangle\langle c|$. This identity, rather than
+a claim only about basis inputs, removes input entanglement.
+Dummy marks and additional future innovations used for bounds
+change no actual channel.
+
+On nonhalting, initialize encoded native centers and default ports.
+Lemma~\ref{lem:line-qmarks} supplies the uniform native estimates at
+every logical step. The repeating schedule has $s$ steps per round
+and identical reference time grids for both lanes, so every premise
+of Proposition~\ref{prop:line-phases} holds. Its canonical histories
+include the intermediate basis-valued registers and locally decoded
+logical rows; its Bragg observable is on the boundary row itself.
+\end{proof}
+
+\begin{lemma}[Hosts with one layer]\label{lem:line-periodone}
+Every line quantum input whose repeating period has one layer has
+datum $(1,0,0,\mathrm{true},\mathrm{false})$ at $e>0$.
+It may be replaced, when choosing a finite witness datum, by a fixed
+depth-two constant-preparation input of that datum.
+\end{lemma}
+\begin{proof}
+One repeated layer has a fixed partition into disjoint finite gate
+blocks, with idle wires regarded as singleton blocks. The union of
+blocks meeting a finite observed support is finite and closed under
+repeated ancestry. If it contains $k$ wires, all output wires reset
+at a tick with probability $e^k$, giving a trace-and-prepare branch
+on that union. Its marginal contracts trace distance by at most
+$1-e^k$ per tick, proving uniqueness and all-state local attraction.
+Begin with a product over gate blocks. Observations separated beyond
+twice the maximum gate diameter plus their widths have disjoint
+block sets and factor at every date. Their unique stationary limit
+has finite-range independence. It has no covariance order or
+nonzero Bragg atom, hence the stated datum. A fixed product
+preparation followed by noisy layers realizes the same datum at
+depth two. This replacement does not raise a general host channel
+to a power. For $J\ge2$ the preceding implementation instead tensors
+host and controller on disjoint wires layer by layer, leaving the
+host's actual round and observation boundary intact. Independent
+qubit noise factors across them, so the joint noisy round is a tensor
+product of TI round channels, even if individual host layers use
+only a periodic schedule.
+\end{proof}

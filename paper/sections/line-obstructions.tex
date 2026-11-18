@@ -1,0 +1,229 @@
+\section{Obstructions, finite rings and partial degrees}\label{sec:line-obstructions}
+\begin{theorem}[Necessary data on the line]\label{thm:line-obstructions}
+In both line categories, $E$ forces $L$ false, without any uniform
+attraction assumption. Multiple TI stationary states force $E$ false
+and $L$ true. Always $N_{\Br}\le N_{\ord}\le N$; if $N=1$, then
+$N_{\ord}=1$ exactly when $L$ holds.
+The total count belongs to $\{1,2,\ldots,\aleph_0,\frakc\}$.
+Consequently the only possible coarse data $(N,E,L)$ are
+\[
+ (1,\mathrm{true},\mathrm{false}),\quad
+ (1,\mathrm{false},\mathrm{false}),\quad
+ (1,\mathrm{false},\mathrm{true}),\quad
+ (k,\mathrm{false},\mathrm{true}),
+\]
+where the last case has $k\in\{2,3,\ldots,\aleph_0,\frakc\}$.
+At \eqref{eq:line-rate}, the first case and the last with $k=\frakc$
+are realized in both categories. No realization or exclusion of
+the other cases is established here.
+\end{theorem}
+\begin{proof}
+Nonemptiness and compactness follow from finite marginal coordinates,
+closed TI and stationarity equations, and Ces\`aro averaging.
+For distinct TI stationary states choose a real local, or Hermitian,
+observable with means $a\ne b$. In their half-mixture the variance
+of its normalized length-$l$ spatial average is at least
+$(a-b)^2/4$ for every $l$. If all distant covariances decayed, a
+near/far split of its double sum would make that variance tend to
+zero: only $O(l)$ pairs have any fixed bounded displacement.
+Thus multiplicity gives $L$ and precludes $E$. The Bragg/covariance
+implication proved in Lemma~\ref{lem:two-order} gives the count
+inequalities. If $N=1$, the compact convex TI stationary set is a
+singleton, so its only point is ordered exactly when $L$ holds.
+
+We prove that $E$ forbids nondecaying covariance. In the classical
+case, let $\mu$ be the unique attracting law and $P$ the transition
+operator on observables. For each deterministic initial row $\eta$,
+$P^tf(\eta)\to\mu(f)$. Bounded convergence gives convergence to this
+constant in $L^2(\mu)$. For distant enough translations the two
+$t$-step backward cones are disjoint. Independent innovations and
+stationarity imply
+\[
+ \Cov_\mu(f,\tau_zg)
+   =\Cov_\mu(P^tf,\tau_zP^tg).
+\]
+Cauchy--Schwarz bounds the right side by the product of the centered
+$L^2$ norms, uniformly in sufficiently large $z$. Letting $t\to\infty$
+proves covariance decay without uniform convergence over starts.
+
+For the quantum case write $P$ for the Heisenberg round and $\mu$
+for its unique stationary state, which is TI by uniqueness.
+Suppose a local covariance fails to decay and choose $|z_j|\to\infty$
+along which it converges to a value different from the product of
+means. In the cyclic GNS representation $(\pi,\Omega)$ of $\mu$,
+the Hilbert space is separable: the chain algebra has a countable
+norm-dense subset. By a diagonal subsequence the bounded operators
+$\pi(\tau_{z_j}b)$ converge weakly simultaneously for a countable
+dense set of $b$, hence for all $b$ by norm approximation.
+Call the limit $Z(b)$. It belongs to the generated von Neumann
+algebra and commutes with every local operator, by eventual spatial
+disjointness and local approximation. Thus $Z$ is positive, unital
+and linear into the center. Define
+\[
+ \Lambda(a,b)=\langle\Omega,\pi(a)Z(b)\Omega\rangle.
+\]
+For sufficiently distant local $a,b$, independent backward circuits
+give $P(a\tau_zb)=P(a)\tau_zP(b)$. Stationarity and translation
+covariance, then the weak limit, imply
+$\Lambda(a,b)=\Lambda(Pa,Pb)$, and by iteration the same identity
+for every $t$. The chosen covariance means that $\Lambda(f,g)$
+is not $\mu(f)\mu(g)$ for some local pair.
+
+We now express $\Lambda$ as an integral of products of two states.
+For finitely many Hermitian $b$, partition the spectra of their
+commuting central $Z(b)$ into intervals of width $\eta$, and let
+$Q_i$ be the joint central spectral projections. For
+$p_i=\langle\Omega,Q_i\Omega\rangle>0$ put
+\[
+ \alpha_i(a)=\frac{\langle\Omega,Q_i\pi(a)\Omega\rangle}{p_i},
+ \qquad
+ \beta_i(b)=\frac{\langle\Omega,Q_iZ(b)\Omega\rangle}{p_i}.
+\]
+Centrality and positivity make these positive unital functionals
+on the chain algebra. On each projection, $Z(b)$ differs from its
+conditional scalar $\beta_i(b)$ by norm at most $\eta$ for the
+chosen $b$. Consequently
+\[
+ \left|\Lambda(a,b)-\sum_i p_i\alpha_i(a)\beta_i(b)\right|
+ \le\eta\|a\|.
+\]
+Exhaust a countable dense Hermitian set and let $\eta\downarrow0$.
+The product of the two compact metrizable chain state spaces has
+compact probability-measure space, so a subsequence of the laws
+$\sum_i p_i\delta_{(\alpha_i,\beta_i)}$ converges to a probability
+law $\theta$. It gives
+$\Lambda(a,b)=\int\alpha(a)\beta(b)\,d\theta$ for every $a,b$.
+For each pair of states, pointwise attraction gives
+$\alpha(P^ta)\to\mu(a)$ and $\beta(P^tb)\to\mu(b)$.
+Their product is bounded by $\|a\|\|b\|$. Dominated convergence,
+together with invariance of $\Lambda$, forces
+$\Lambda(a,b)=\mu(a)\mu(b)$, a contradiction.
+Thus $E$ implies $L$ false in both categories.
+
+The nonextreme points of a compact metrizable convex set form a
+countable union of compact sets of midpoints of pairs at distance
+at least $1/j$. Hence its extreme set is $G_\delta$ and is Polish.
+The perfect-set theorem gives the asserted possibilities for $N$,
+without a continuum-hypothesis assumption. The implications already
+proved give the displayed necessary coarse list.
+A constant classical table gives its one-step iid replacement law.
+A fixed on-site quantum preparation followed by qubit noise gives
+a product stationary state. Both have
+$(1,0,0,\mathrm{true},\mathrm{false})$; a one-symbol classical
+alphabet is also allowed. A fixed never-halting controller gives
+$\sigma_\infty$ by Proposition~\ref{prop:line-phases}.
+These are the two claimed realizations. The Rice reductions range
+over the actual image and require no classification of the remaining
+possibilities.
+\end{proof}
+
+\begin{remark}[Fixed finite rings]\label{rem:line-rings}
+A classical ring of $l$ sites has a complete reset with probability
+$e^l$ each step. Its whole-state total-variation contraction
+coefficient is at most $1-e^l$. If a finite quantum ring has $k$
+physical wires, simultaneous reset of every wire in the final layer
+has probability $e^k$ and makes the full output trace-and-prepare.
+Its trace-distance contraction coefficient is at most $1-e^k$.
+Iteration gives a unique stationary state attracting every initial
+state in either case. An unbounded-distance covariance label concerns
+the infinite line and has no such meaning on one fixed ring. These
+contraction bounds need not be uniform as the ring grows; growing
+storage horizons are consistent with fixed-ring uniqueness.
+At replacement probability one every input is reset; the theorems
+use the strictly smaller rate \eqref{eq:line-rate}. A noisy identity
+also has the reset datum, since a fixed finite observation forgets
+its starting values after all its sites or wires have been reset.
+\end{remark}
+
+\begin{theorem}[Partial degree results on the line]\label{thm:line-cuts}
+Uniformly on valid presentations in either line category, for each
+$r\ge1$ the cut $N\le r$ belongs to $\Pi^0_2$ and is halting-hard.
+For each $k\ge2$ the cut $N\ge k$ belongs to $\Sigma^0_2$ and is
+nonhalting-hard. Matching second-level hardness on the line is not
+asserted.
+\end{theorem}
+\begin{proof}
+We give the effective finite-coordinate argument, including its
+hypotheses for the per-layer channel. Enumerate real local coordinates
+$x_1,x_2,\ldots$ bounded by one: cylinder probabilities classically,
+and real and imaginary density-matrix entries with Hermiticity
+built in quantumly. Use all finite intervals and their translates.
+Normalization, consistency, TI and stationarity are countably many
+effective linear constraints. Classical positivity is nonnegativity.
+Quantum positivity is the family
+$v^*\rho_Iv\ge0$ for every rational complex vector $v$ on every
+finite interval $I$; density makes this equivalent to positive
+semidefiniteness. The backward circuit computing a local Heisenberg
+image includes every depolarizing layer. Rational $e$ and algebraic
+gates give exact algebraic coefficients with decidable arithmetic
+and order. Thus all these linear constraints are effectively
+enumerable in both categories.
+
+Let $b(m)\ge m$ increase to cover the coordinates used by the first
+$m$ constraints. Let $P_m$ be their nonempty bounded algebraic
+polytope in those coordinates with coordinate bounds $[-1,1]$.
+All earlier constraints are retained. Every genuine stationary
+state projects into every $P_m$. Conversely a coordinatewise limit
+of outer points with $m\to\infty$ satisfies every constraint and
+is genuine. Product compactness implies that for each fixed $n$
+the first-$n$ projections of $P_m$ converge in Hausdorff distance
+to those of $\cK$: otherwise distant outer points have a convergent
+subsequence contradicting that characterization.
+
+Every vertex of $P_m$ is computable: enumerate full-rank active
+constraint systems, solve, and check all inequalities. This also
+handles lower-dimensional polytopes, since at a vertex active
+normals must span the ambient space or a feasible segment remains.
+A bounded polytope is the convex hull of its vertices, by induction
+on face dimension using boundary-to-boundary segments. Exact
+algebraic linear feasibility is therefore decidable.
+Put $\eta=2^{-n}$. If $V$ is the number of vertices, choose an integer
+$L_{m,n}\ge8V/\eta$ and let $\mathcal Q_{m,n}$ be all their convex
+combinations whose coefficients are multiples of $1/L_{m,n}$.
+This finite set is an $\eta/4$-net in the first $n$ coordinates:
+round the first $V-1$ weights down and put the remainder on the
+last vertex; total weight error is at most $2(V-1)/L_{m,n}$.
+
+For $m\ge n$, let $\mathsf T_r(n,m)$ mean that some $r$ points of
+$\mathcal Q_{m,n}$, with repetitions, have a convex hull within
+$\eta$ of every vertex in first-$n$ maximum norm. For each candidate
+and vertex this is finite algebraic feasibility in simplex
+coefficients $\lambda_i$, with inequalities
+$|v_j-\sum_i\lambda_i y_{i,j}|\le\eta$, $1\le j\le n$.
+So $\mathsf T_r$ is decidable. Vertex coverage covers the polytope
+because the sum of a convex hull and a norm ball is convex.
+We claim
+\[
+ N\le r\quad\Longleftrightarrow\quad
+ \forall n\ge1\ \exists m\ge n:\mathsf T_r(n,m).
+\]
+A compact convex set with finitely many extremes is their hull:
+if a point lay outside, a finite-coordinate separating functional
+would have a maximizing compact face disjoint from that hull;
+successive coordinate maximization there gives a further extreme,
+a contradiction. Hence if $N\le r$, choose $r$ generators, repeating
+as needed. For fixed $n$, choose $m$ so the outer projection is within
+$\eta/4$ of $\cK$, then approximate those generators by
+$\mathcal Q_{m,n}$ within $\eta/4$. Their hull covers the outer
+projection within $\eta/2$, proving the test.
+
+Conversely choose successful stages $m_n\ge n$ and their $r$ centers.
+A common coordinatewise convergent subsequence has limits
+$y_1,\ldots,y_r\in\cK$, since every constraint eventually holds.
+For any $x\in\cK$, vertex coverage provides simplex coefficients
+approximating its first $n$ coordinates within $2^{-n}$. A further
+subsequence of these coefficients converges, giving
+$x=\sum_i\lambda_i y_i$ in each coordinate. The limiting centers
+were chosen before $x$, so these same $r$ points generate all of
+$\cK$. There are at most $r$ extremes. This proves the equivalence
+and the $\Pi^0_2$ membership; complementation gives the $\Sigma^0_2$
+membership of $N\ge k$.
+
+Use a reset host in Proposition~\ref{prop:line-branches}. Its two
+counts are $1$ on halting and $\frakc$ on nonhalting. This reduces
+halting to every listed finite upper cut and nonhalting to every
+listed finite lower cut. Such a two-branch reduction gives no
+matching hardness at the second arithmetical level. The totality
+construction in Section~\ref{sec:completeness} uses transverse
+slices and a different controller and is not a line construction.
+\end{proof}

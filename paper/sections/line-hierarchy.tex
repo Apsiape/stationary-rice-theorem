@@ -1,0 +1,329 @@
+\section{Two hierarchies and their relative spatial origin}\label{sec:line-hierarchy}
+\subsection{The imported deterministic construction}
+Let $f_n$ be exactly the radius-one hardwired rule of
+\cite[Theorem~C and Section~3.5]{DMline}, with its unique empty symbol.
+Its literal is the true initial configuration of $U(n)$, doubled at
+successive promotions. A promotion executes one machine step.
+No external parameter reader is used. Geometry, decoding, interpreter
+and native transition are unchanged. Section~3 of that reference
+makes the finite table computable from $n$, at fixed $P,T,w$.
+A logical step below means one native update.
+
+We use the following numbered statements of \cite{DMline}.
+Definition~4.1 defines $i$-sparsity by deleting one translate of
+$3w(P^{i-1},T^{i-1})$ in every $w(P^i,T^i)$ window;
+$0$-sparsity means emptiness. Lemma~4.2 gives disjoint child witnesses.
+Definition~5.1 supplies nominal and served tile observations, whose
+spatial support is inside the tile and whose lookahead is at most
+$T^j-1$. Proposition~5.3 gives organization for every translated grid,
+every history with sparse deviations, true read-only operands and
+ordinary unhalted lower ranks; in particular nominally live tiles
+with distinct geographical origins cannot overlap.
+Lemma~5.24, with six consecutive served positive inputs of one tribe
+and two prescribed positive central transitions, gives service of
+both central homes for two periods, the correct lower clock and
+address residues, and the two served prescribed upper successors.
+It assumes a fully protected $(j-1)$-sparse rank-$j$ test.
+Lemmas~6.2 and~6.3 give the halted all-start cut and ascent from any
+live physical site to a failed centered test after a common burn-in.
+Lemma~6.4 gives the clean initialized negative-time hierarchy in the
+hardwired family. Lemma~6.5 constructs its deterministic nested tests.
+The clock witness in Theorem~C alone would not imply a count of
+stationary row laws; we need the spatial-residue conclusion of
+Lemma~5.24 and the decoder below.
+
+\subsection{A quantitative mark estimate}
+\begin{lemma}[Sparse tests and fixed-rank paths]\label{lem:line-sparse}
+Suppose deviations of any native history are contained in iid marks
+of rate at most $e$. For every prescribed centered test with half-sides
+$M_*(P^{i+1},T^{i+1})$, failure of $i$-sparsity has probability at most
+\[
+ a_i=A_*V_*^{-2\cdot2^i},\qquad r_i=R_*F_*^i
+\]
+and is supported in a max-norm ball of radius $r_i$.
+Moreover
+\[
+ \sum_i a_i<\tfrac14,\qquad
+ \sum_i(i+1)a_i<\infty,\qquad
+ \sum_i10^6r_i^4\sqrt{a_i}<\tfrac12.
+\]
+For each fixed $K$, a nearest- or diagonal-neighbor path of vertices
+with a failed centered test of some rank $0\le i\le K$, starting at
+a prescribed point and reaching max-distance $h$, has probability
+at most $C_K\exp(-c_Kh)$.
+\end{lemma}
+\begin{proof}
+All tests needed here fit the stated half-sides. One-rank work is in
+a $w$-window and its collar has $\lfloor w/5\rfloor$ cells. The nested
+tests of \cite[Lemma~6.5]{DMline} have fewer than $w$ cells at their
+own scale. Cap ancestry at scale $i+1$ costs at most
+$(4T/P+4,6)$ cells before its work collar and rounding
+\cite[Lemma~6.3]{DMline}. Covering every translate of a tile through
+one point costs at most two further cells per side. All these finite
+multipliers are below $M_*$.
+
+Let $b_i$ bound failure on a full doubled box with side vector
+$2w(P^i,T^i)$. Its base bound is $b_0\le4w^2e$.
+The disjoint witnesses of \cite[Lemma~4.2]{DMline} have at most
+$(2P+3)(2T+3)$ possible child positions, hence at most $D_*$ pairs.
+Independence on disjoint child boxes gives $b_{i+1}\le D_*b_i^2$.
+Induction yields
+\[
+ b_i\le D_*^{-1}(4D_*w^2e)^{2^i}
+       =D_*^{-1}V_*^{-2\cdot2^i}.
+\]
+Cover a larger prescribed box by a mesh of spacing $w(P^i,T^i)$,
+including one mesh step past each boundary. Every moving $w$-window
+has its intersection covered by one doubled box. There are at most
+$A_*$ such boxes. If all pass, restriction gives the deletion required
+in every moving window. At rank zero the same cover bounds every
+marked site. The union bound proves the asserted $a_i$; the enclosing
+box has radius at most $r_i$. The estimate applies to arbitrary error
+values, since sparsity is inherited by subsets of the marks.
+
+Using $2^i\ge i+1$, the first two sums are bounded respectively by
+\[
+ \frac{A_*}{V_*^2(1-V_*^{-2})},\qquad
+ \frac{A_*}{V_*^2(1-V_*^{-2})^2}.
+\]
+The third is at most
+\[
+ \frac{10^6R_*^4\sqrt{A_*}}{V_*(1-F_*^4/V_*)}<\tfrac12.
+\]
+The definitions in \eqref{eq:line-rate} give all three inequalities.
+
+To prove the path assertion, cover a finite such path by its failing
+test balls. Greedily retain disjoint balls in decreasing radius.
+Every removed ball is contained in a retained triple ball. A simple
+chain of adjacent retained triple balls connects the endpoints.
+The sum of its radii is at least $h/8$: the diameters are at most $6r$
+and a unit jump costs at most one further radius.
+The first center has at most $(6r+1)^2\le49r^2$ choices.
+Successive centers of radii $r,s$ have at most
+$(6r+6s+3)^2\le225r^2s^2$ choices. For an ordered type list the total
+placement count is therefore at most the product of $10^6r_i^4$.
+Disjoint retained supports make the failure probability at most the
+product of their $a_i$. Reserve half of each exponent. Since the
+radius sum is at least $h/8$, this half contributes at most
+\[
+ \exp\left[-\frac h8
+       \min_{0\le i\le K}\frac{-\log a_i}{2r_i}\right].
+\]
+Sum the remaining half over type lists and placements. The resulting
+geometric series converges because $\sum_i10^6r_i^4\sqrt{a_i}<1/2$.
+This proves the claimed exponential estimate. Only $K$ enters its
+exponent. The entire event is a function of the common dominating
+marks, independently of which histories might realize discrepancies.
+\end{proof}
+
+\subsection{Forgetting on halting}
+\begin{lemma}[All-input common-map forgetting]\label{lem:line-forget}
+If $U(n)$ halts, a native history whose deviations are contained in
+the marks of Lemma~\ref{lem:line-sparse} forgets all starting rows on a
+common event with one-site failure probability $C\exp(-ct)$, provided
+that with innovations fixed every update, even a marked update, is a
+deterministic function of its three old symbols. The constants may
+depend on $n$. The bound is for the event that the entire graphical
+map at the observed site is nonconstant.
+\end{lemma}
+\begin{proof}
+Let $K$ be the first halted rank. Its true literal forces the protected
+strong issue to be empty on every triple, including forged input and
+work symbols; all lower ranks are ordinary. For $K\ge1$,
+\cite[Lemmas~6.2--6.3]{DMline} therefore apply literally. Their premises
+use the native rule off deviations, the unchanged geometry and
+true hardwired operands, all of which hold here. Choose the common
+burn-in greater than twice the largest radius of the finitely many
+centered tests below $K$, plus two. After this burn-in any live vertex
+has a failed centered sparsity test below $K$. This inclusion is
+simultaneous for every starting row on the same marks.
+
+At a discrepancy of two trajectories at least one symbol is live,
+since the empty symbol is unique. If the three parents were identical,
+the common deterministic update with fixed innovations would give
+identical children. Trace a discrepant parent backwards to half the
+elapsed time. For $t$ beyond twice the burn-in plus four, this gives a
+nearest- or diagonal-neighbor path of failed tests with time span at
+least $\lfloor t/2\rfloor-1$. Lemma~\ref{lem:line-sparse} makes its
+probability exponentially small. The same noise-only path is necessary
+if \emph{some} pair of starting rows disagrees, so no union over rows
+is needed. Finite exceptional times enter the prefactor.
+
+At $K=0$ an unmarked output is always empty. A discrepancy must follow
+a backward path all of whose vertices are marked. There are at most
+$3^t$ length-$t$ paths and each has probability at most $e^t$, giving
+$(3e)^t$. For exact classical replacement, the rank-zero constant rule
+in fact coalesces in one update. A marked encoded update need not erase
+a discrepancy, so the path bound is used for that implementation.
+
+If an ascent test reads beyond the observation date, independently
+extend the innovations to those dates. They can witness the necessary
+path without changing the nonconstancy event, which depends only on
+the actual backward cone. Finally a union bound over an observed finite
+set gives the bound for its whole common map.
+\end{proof}
+
+\subsection{Decoding a spatial origin}
+\begin{lemma}[Stopped descent and finite decoders]\label{lem:line-decoder}
+If $U(n)$ never halts, initialize its clean aligned hierarchy from
+\cite[Lemma~6.4]{DMline}. For every $j\ge1$, a finite space-time decoder
+at $(x,t)$, $t\ge T^j$, returns the left edge of its true rank-$j$ tile
+modulo $P^j$, except with probability at most
+\[
+ d_j=\sum_{i\ge j-1}a_i,\qquad \sum_{j\ge1}d_j<\infty.
+\]
+The bound is uniform in $x,t$ and integer spatial shifts of the
+initialization. At rank zero, with probability at least
+$1-\sum_i a_i>3/4$, the physical root is live with both initialized
+structural residues, in particular its spatial address modulo $P$.
+\end{lemma}
+\begin{proof}
+Every rank is ordinary on a nonhalting input. Join the fully occupied
+clean negative-time history to any forward history obeying the native
+rule off the marks. For $j\ge1$, examine all integer tiles of width
+$P^j$ and height $T^j$ containing $(x,t)$, using half-open tiles.
+Compute their finite nominal observations from
+\cite[Definition~5.1]{DMline}. Return the common left edge modulo
+$P^j$ if at least one is nominally live and all nominally live
+candidates have that edge; otherwise fail. The decoder is a cylinder
+function, possibly reading dates on either side of $(x,t)$.
+
+Start the geometrical ascent of tests with the entire true tile.
+Its dimensions are less than $P^{j+1}$ and $T^{j+1}/2$, as required
+by \cite[Lemma~6.5]{DMline}. For completeness, if a smaller time span
+is $[a,b)$ of length less than $T^k/2$, put
+$h=\lfloor a/T^k-1/2\rfloor$; it lies in
+$[(h+1/2)T^k,(h+2)T^k)$. If its spatial span is $[c,e')$ of length
+less than $P^k$, choose $k'=\lfloor c/P^k\rfloor$ and the two homes
+$k',k'+1$. Add the six bottom reads, their work, covering homes and
+the prescribed collar. The resulting box again fits the next rank,
+by the strict inequalities of that lemma. Every choice is determined
+by the true grid and the observation, independently of the noise.
+
+At a sufficiently large finite top rank $r$ choose first test date
+$-T^r$. Enlarge $r$ so $4(t+2)<T^r$ and the bottom tile and collar fit.
+All six top reads, including their lookahead at most $T^r-1$, are
+strictly before zero. The initialized past supplies their common
+tribe and both prescribed positive successors. Impose
+$(k-1)$-sparsity for these tests at $k=j+1,\ldots,r$.
+Apply \cite[Lemma~5.24]{DMline} at the top. It serves both central
+homes throughout the covering two periods with their correct child
+residues. Its two upper successors supply the actual positive
+transitions needed at the next descent. Repeating the same argument,
+with those actual served inputs and successors at each rank, and
+stopping at $j$, gives a served live observation on the true tile.
+A served live observation is nominally live. No recovery of arbitrary
+mutable root work data is asserted.
+
+For uniqueness, put the true tile, all overlapping candidates and
+their collars in one prescribed test of scale $j$. The size bound was
+checked in Lemma~\ref{lem:line-sparse}. Its $(j-1)$-sparsity implies
+$j$-sparsity. The classification of \cite[Proposition~5.3(i)]{DMline}
+excludes nominally live overlapping candidates with different spatial
+origins. In that proposition geographical origin is the full space-time
+offset modulo $(P^j,T^j)$; its shifted-child-grid argument uses both
+offsets. The decoder's common-edge convention also works using only
+the spatial-origin consequence. The true tile supplies existence,
+and all live candidates therefore have its spatial residue.
+The failed-test union has probability at most
+$\sum_{i\ge j-1}a_i$. Negative-time deviations are empty and may be
+dominated by an independent extension of the marks. This proves the
+uniform bound, and the weighted sum in Lemma~\ref{lem:line-sparse}
+proves summability. Continuing the descent through rank one instead
+of stopping gives the physical root and both residues by the explicit
+conclusion of \cite[Lemma~5.24]{DMline}, with error at most $\sum_i a_i$.
+\end{proof}
+
+\subsection{Stationary laws with distinct relative origins}
+\begin{proposition}[Continuum many ordered extreme states]\label{prop:line-phases}
+Use two autonomous copies of the nonhalting hierarchy on the same
+line. Their noises may be dependent, provided each satisfies
+Lemmas~\ref{lem:line-sparse}--\ref{lem:line-decoder}.
+More generally there may be a fixed positive number of logical
+steps per observed round. The joint controller has continuum many
+extreme TI stationary states with a single-row Bragg atom at $\pi$.
+\end{proposition}
+\begin{proof}
+Let $G=\varprojlim_j\Z/P^j\Z$. It has cardinality $\frakc$: each digit
+may independently be zero or one, while it is a countable product
+of finite sets. Fix $d\in G$. For $h\ge1$, let $\hat d_h\in[0,P^h)$ be
+its representative. Initialize the first copy with spatial origin
+zero and the second with origin $\hat d_h$, on the same time grid.
+Neither rule nor noise reads $d$. In an encoded implementation start
+at the boundary preceding fanout with encoded centers and default
+auxiliaries. Run the actual dynamics. Average its trajectory over
+spatial shifts $0,\ldots,h-1$ and time shifts by $0,\ldots,h-1$
+complete rounds, extending negative dates arbitrarily for compactness.
+Take a common weakly convergent subsequence on every finite window.
+
+Boundary defects in either average are at most $2/h$, so the limit
+is TI and invariant under complete-round time translation. The
+conditional transition identities against any finite past cylinder
+are the true kernels: each initialized experiment uses fresh
+innovations, complete-round shifts retain the same schedule phase,
+and the proportion of shifts whose cylinder reaches before the
+initialization tends to zero. These identities pass to the limit
+on cylinders and then by approximation. Thus the limit is the
+canonical two-sided trajectory of its stationary boundary row,
+with the intermediate kernels inserted in their specified order.
+For any stationary row law this trajectory map is affine on finite
+cylinders and Borel; use a past boundary and stationarity for
+two-sided cylinders. In the quantum implementation all boundary
+controller states are diagonal, as proved in
+Lemma~\ref{lem:line-physical}, so the same construction applies to the
+full basis-valued register and its local logical decode.
+
+Apply the two rank-$j$ decoders at the space-time origin and subtract
+the first returned residue from the second modulo $P^j$, failing if
+either fails. Common spatial shifts cancel; time shifts do not move
+a spatial origin. For $h\ge j$ the correct difference is $d\bmod P^j$.
+At fixed $j$ the proportion of starts too early is $O(T^j/h)$, and
+on the others the error is at most $2d_j$, with $d_j$ from
+Lemma~\ref{lem:line-decoder}. Each decoder is a finite
+cylinder of the intermediate history, so the same bound holds in
+the limit. Borel--Cantelli gives probability one to the Borel event
+$B_d$ that every sufficiently large output is the residue of $d$.
+For distinct $d$ these events are disjoint, since a differing residue
+remains different at all higher ranks.
+
+Let $f$ on the first lane be $(-1)^a$ on a live symbol with spatial
+address $a$, and zero on the empty symbol; for encoded rows use the
+locally decoded observable. Since $P$ is even,
+Lemma~\ref{lem:line-decoder} gives in the origin-zero experiment,
+for every site and date, including round boundaries,
+\[
+ \mathbb E[(-1)^x f(x)]\ge1-2\sum_i a_i>\tfrac12.
+\]
+A spatial shift changes the prescribed sign by one common parity.
+For every interval length $l$, Jensen's inequality before the
+shift mixture gives
+\[
+ \mathbb E\left|\frac1l\sum_{x=0}^{l-1}(-1)^xf(x)\right|^2
+ \ge\tfrac14.
+\]
+This is a finite row observable. The bound passes through both
+averages and the weak limit. The phase-twisted mean ergodic argument
+in Section~\ref{sec:framework} shows that its limit is the Bragg
+second moment at $\pi$.
+
+The TI stationary controller set is compact convex metrizable in
+the locally convex space of its countable real cylinder coordinates.
+The metrizable representation theorem
+\cite[Theorem~4.2, pp.~316--317]{bishop-deleeuw} therefore represents
+our row state by a probability measure carried by its extreme points.
+The mixture identity for their canonical trajectories holds on
+cylinders by linearity of kernels and stationarity, hence on all
+Borel sets by the monotone class theorem. Since $B_d$ has probability
+one, almost every representing component also gives it probability
+one. The finite Bragg second moments are bounded affine functions
+of a row state and converge in every TI state. Bounded convergence
+shows that the integral of the limiting moments is at least $1/4$.
+A set of positive representing measure has a positive moment, so
+some extreme component has both label $d$ and a peak at $\pi$.
+A stationary row state has a unique canonical trajectory and cannot
+carry two disjoint probability-one labels. Varying $d$ gives
+$\frakc$ distinct such extremes; countable coordinates give the
+matching upper bound. No uniqueness of the representation, spatial
+ergodicity of its components, or conditioning of the dynamics on a
+noncausal event is used.
+\end{proof}

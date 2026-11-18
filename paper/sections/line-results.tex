@@ -1,0 +1,75 @@
+\section{Rice theorems on the infinite line}\label{sec:line-results}
+For the line categories, use the definitions of Section~\ref{sec:framework}
+with spatial lattice $\Z$ and averaging intervals $[0,l)\cap\Z$.
+In particular $E$ requires a unique stationary state among \emph{all}
+states, attracting every initial state locally; extreme points are taken
+in the jointly TI and stationary set. Use the same five-coordinate
+notation $\sigma$ and the same maximal value $\sigma_\infty$.
+The wavevector is in $\R/2\pi\Z$ and is nonzero for a Bragg label.
+
+A classical line input has a nonempty finite alphabet, an arbitrary
+finite stencil in $\Z$, a deterministic finite table, and independent
+uniform whole-symbol replacement at rate $e$ after each update.
+A quantum line input has finitely many qubits per site and a finite
+repeating list of finite-range local CPTP gates with exact algebraic
+entries and fresh product environments. Gates within a layer act on
+disjoint internal tensor factors. After \emph{every} layer, independently
+on every qubit, apply
+\[
+ \cD^{(1)}_e(X)=(1-e)X+e\Tr(X)I_2/2.
+\]
+This includes preparation, reset and idle layers. The full noisy round
+is promised TI. The finite presentation, gate arity, number of wires,
+range and period may vary with the input. Arbitrary entangled initial
+states are allowed. Gate arity in the constructed family grows with
+the program; no bounded-arity primitive-library assertion is made.
+The general-site, once-per-round whole-site quantum category of
+Theorem~\ref{thm:refined} is not treated on the line.
+
+Fix the native interpreter, track order and tape template of
+\cite[Section~3 and Appendix~A]{DMline}. Choose $w$ to be the least
+admissible integer for the finite requirements of that construction,
+including $w\ge10^{10}$. Put $P=5\cdot2^w$ and let $T$ be its fixed
+native clock period. Both exceed $2w$. These choices are independent
+of the program. Define
+\begin{align}
+ F_*&=\max(P,T),& M_*&=1000w(P+T+1)^3,\notag\\
+ D_*&=8(P+2)^2(T+2)^2,&
+ A_*&=(4M_*(P+1)+8)(4M_*(T+1)+8),\notag\\
+ R_*&=4M_*F_*,& V_*&=10^9R_*^4A_*F_*^4,\notag\\
+ e&=\frac{1}{4D_*w^2V_*^2}.&&\label{eq:line-rate}
+\end{align}
+These are definite computable integers and a definite rational once the
+fixed interpreter is chosen. Only the existence of one such rate is
+asserted; no decimal value is claimed. In particular $0<e<1/32$.
+
+\begin{theorem}[Classical Rice theorem on the line]\label{thm:line-classical}
+At the fixed rational rate \eqref{eq:line-rate}, every predicate of
+$(N,E,L)$ nonconstant on the realized classical line data is undecidable.
+\end{theorem}
+
+\begin{theorem}[Quantum Rice theorem on the line]\label{thm:line-quantum}
+For the line quantum inputs with independent single-qubit depolarization
+after every layer specified above, at the same rate
+\eqref{eq:line-rate}, every predicate of $(N,E,L)$ nonconstant on the
+realized data is undecidable.
+\end{theorem}
+
+\begin{theorem}[Refined line theorem]\label{thm:line-refined}
+In each line category separately, every predicate of
+$\sigma=(N,N_{\ord},N_{\Br},E,L)$ nonconstant on the realized values is
+undecidable at \eqref{eq:line-rate}. The value $\sigma_\infty$ is realized.
+If a predicate is false there, halting many-one reduces to it; if true
+there, nonhalting many-one reduces to it. These conclusions hold also
+when every infinite count is reported as a single infinity symbol.
+\end{theorem}
+
+The proofs occupy Sections~\ref{sec:line-hierarchy}--\ref{sec:line-preservation}.
+Compactness, extreme lifts and the implication from a nonzero Bragg
+atom to covariance order follow by the full proofs of
+Lemmas~\ref{lem:compact} and~\ref{lem:two-order}, with intervals in place
+of cubes. A line circuit has a finite backward cone and independent
+environments in distant cones, exactly as those proofs require.
+For quantum changes of coordinates, the depolarizing convention is
+covariant under products of single-qubit unitaries and wire permutations.
+An entangling on-site conjugation need not remain in this input category.

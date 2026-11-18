@@ -1,0 +1,174 @@
+\section{Exact host correspondence and the line reductions}\label{sec:line-preservation}
+For a classical host $H$, take its deterministic product with two
+copies of $f_n$, then use one uniform replacement on the entire
+product alphabet with probability $e$. Every coordinate has exactly
+its original replacement marginal. In particular the controller
+lanes may share a flag; their individual estimates are unchanged.
+For a quantum host of period $J\ge2$, tensor two encoded controllers
+with it in each of its $J$ layers. Independent qubit noise makes the
+host and controller round channels literal tensor factors. Denote
+either joint construction by $J(H,n)$, using the equivalent depth-two
+witness of Lemma~\ref{lem:line-periodone} when necessary.
+
+\begin{proposition}[Full correspondence on halting]\label{prop:line-preserve}
+If $U(n)$ halts, projection induces an affine homeomorphism between
+the TI stationary sets of $J(H,n)$ and $H$. It preserves $E$, and for
+each corresponding stationary state it preserves covariance order
+and every fixed nonzero-wavevector Bragg label. Consequently
+$\sigma(J(H,n))=\sigma(H)$, without a finiteness or spatial-ergodicity
+assumption on the host stationary set.
+\end{proposition}
+\begin{proof}
+Let $\alpha_m\to0$ bound the probability that the recent $m$-round
+graphical controller map to one physical site depends on any initial
+controller input. For the two lanes, add the bounds in
+Lemma~\ref{lem:line-forget}, including the finite last-parent
+enlargement of Lemma~\ref{lem:line-physical}. They hold under the true
+common innovations.
+For a host state $\mu$, let $W_m(\mu)$ be the output after $m$ rounds
+starting from $\mu$ and a constant TI controller row.
+For any joint input $\rho$ and an observation containing $k$
+controller sites, the local distance between its evolved output and
+$W_m(\rho_H)$ is at most $k\alpha_m$; distance means total variation
+or half trace norm.
+
+Classically use the same initial host row and the same joint flags
+and replacement values in the two experiments. On controller
+constancy the complete observed pair agrees. This comparison retains
+all correlations induced by the shared host flags. Quantumly,
+condition the finite backward circuit on controller reset flags
+and bits. The channel identity in Lemma~\ref{lem:line-physical} makes
+each good reduced controller branch trace-and-prepare. Tensoring
+it with the independent host channel yields the same output from
+an entangled input as from the product comparison using its host
+marginal. Bad branches cost at most one in half trace norm. In fact,
+for quantum inputs the exact tensor product gives
+\[
+ W_m(\mu)=H^m(\mu)\otimes C^m(c),
+\]
+where $C$ is the whole controller and $c$ the fixed constant start.
+On halting its unique stationary law is $\nu_C$, and every stationary
+joint state is $\mu\otimes\nu_C$ for a stationary host state $\mu$.
+
+For existence of a stationary lift, start with a stationary host
+marginal times a constant controller and average iterates. Compactness
+of finite cylinder probabilities or density matrices gives a limit;
+stationarity and TI are closed, since finite observations have finite
+backward cones. The factor remains the required host marginal.
+For two stationary lifts of $\mu$, their restrictions are within
+$2k\alpha_m$ for every $m$, hence identical. Projection is thus an
+affine continuous bijection of compact metrizable stationary sets,
+so its inverse is continuous. The identical argument without TI gives
+uniqueness of lifts among all stationary states.
+
+Suppose the host has $E$. To prove attraction of the joint process,
+apply the comparison only to its last $m$ rounds at time $t$.
+For fixed $m$, $W_m$ depends continuously on finitely many host input
+coordinates. The host marginal at $t-m$ converges locally to $\mu$,
+so the comparison converges to $W_m(\mu)$. The stationary joint lift
+is also within $k\alpha_m$ of that state. First let $t\to\infty$,
+then $m\to\infty$. This proves all-state attraction without a uniform
+host convergence rate. Conversely projection carries attraction to
+the host: every initial host state has an extension and every
+stationary host state a stationary lift. Thus $E$ is equivalent.
+
+For local Hermitian joint $f$, evaluating its comparison channel
+against the constant controller defines a local host observable
+$G_m(f)$ with $\|G_m(f)\|\le\|f\|$. The comparison is TI. For
+translates with disjoint $m$-round backward cones,
+\begin{equation}\label{eq:line-factorization}
+ W_m(\mu)(f\tau_x g)
+   =\mu\bigl(G_m(f)\tau_xG_m(g)\bigr).
+\end{equation}
+Classically the two cones' innovations are independent, even though
+flags \emph{within} each cone are shared across tracks. Quantumly
+fresh product environments give the same operator identity before
+any host state is evaluated. First moments satisfy the analogous
+identity by definition. If each controller support has at most $r$
+sites, the finite-observation bound on the product and the first
+moments gives a stationary/comparison covariance error at most
+\[
+ 8r\|f\|\|g\|\alpha_m.
+\]
+If the host state has no covariance order, let $|x|\to\infty$ at
+fixed $m$ in \eqref{eq:line-factorization}, and then $m\to\infty$.
+The joint covariances decay. Host-only observables give the converse.
+
+For any fixed local $f$ and $q\ne0$, expand the normalized weighted
+second moment over the $l^2$ pairs of translates in $[0,l)$.
+Each stationary/comparison pair error is at most
+$4r\|f\|^2\alpha_m$. At fixed $m$ only $O_m(l)$ pairs have intersecting
+backward cones. Every other pair obeys
+\eqref{eq:line-factorization}. After division by $l^2$ the comparison
+and the host Bragg moment of $G_m(f)$ have the same limit.
+First let $l\to\infty$, then $m\to\infty$. If the host has no atom
+at $q$ for any local observable, neither has the joint state.
+Host-only observables give the reverse implication for every $q$.
+The affine homeomorphism preserves extreme points, so it preserves
+$N,N_{\ord},N_{\Br}$ and $L$ in addition to $E$.
+\end{proof}
+
+\begin{proposition}[The two line branch values]\label{prop:line-branches}
+The construction is total computable from the finite presentations,
+and at the single rate \eqref{eq:line-rate} satisfies, for every host,
+\[
+ \sigma(J(H,n))=
+ \begin{cases}
+ \sigma(H),& U(n)\text{ halts},\\
+ \sigma_\infty,& U(n)\text{ never halts}.
+ \end{cases}
+\]
+\end{proposition}
+\begin{proof}
+The first branch is Proposition~\ref{prop:line-preserve} and, if
+needed, Lemma~\ref{lem:line-periodone}. In the second,
+Proposition~\ref{prop:line-phases} gives continuum many extreme TI
+stationary controller states with peak $\pi$.
+The factor projection onto the controller is onto: start the joint
+process with that stationary factor marginal and any TI host row,
+and take Ces\`aro limits. This works for shared classical flags
+because the projected replacement is exactly uniform on the
+controller alphabet. For each extreme controller state its fiber
+is a nonempty compact face. Successively maximize a countable
+separating coordinate family there to obtain an extreme joint lift,
+as in Lemma~\ref{lem:compact}. Distinct controller marginals distinguish
+the lifts, and controller-only observables retain their peak.
+Hence
+\[
+ \frakc\le N_{\Br}\le N_{\ord}\le N\le\frakc.
+\]
+Multiple stationary states preclude $E$ and imply $L$ by
+Lemma~\ref{lem:two-order}. The full datum is therefore $\sigma_\infty$
+for every host.
+
+The native table is computable from $n$, with finite alphabet,
+fixed geometry and no word-width dependence in $e$.
+Classical product rules and their finite tables are enumerable.
+Quantum code length, repetition length, fanout and lookup tables
+are finite computable data; their Kraus entries are algebraic.
+For host period $J\ge2$ the construction uses exactly $J$ layers
+and preserves its observed round. The one-layer case is detected
+from the finite presentation and replaced as already proved.
+Thus the whole map is effective in the specified input categories.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:line-refined}]
+A fixed program that never halts realizes $\sigma_\infty$ by
+Proposition~\ref{prop:line-branches}. Let $Q$ be a predicate nonconstant
+on the realized data of the chosen category. There is a finite host
+$H$ with $Q(\sigma(H))\ne Q(\sigma_\infty)$, for otherwise the predicate
+would be constant. Fix that finite host as a constant of the reduction.
+No procedure finding witnesses from predicates is needed.
+Given a program $n$, output $J(H,n)$. Its datum is $\sigma(H)$ on
+halting and $\sigma_\infty$ on nonhalting. If $Q(\sigma_\infty)$ is
+false, the output satisfies $Q$ exactly when $U(n)$ halts; if true,
+exactly when $U(n)$ never halts. These are the asserted many-one
+reductions. Reporting all infinite counts by one symbol preserves
+both branches and the same finite-witness reasoning.
+\end{proof}
+\begin{proof}[Proofs of Theorems~\ref{thm:line-classical} and~\ref{thm:line-quantum}]
+A predicate of $(N,E,L)$ is a predicate of the refined datum.
+Nonconstancy on its realized coarse values is exactly nonconstancy
+of the lifted predicate on the realized refined values.
+Theorem~\ref{thm:line-refined} applies in each category separately.
+\end{proof}

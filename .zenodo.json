@@ -2,8 +2,8 @@
   "title": "A Rice theorem for stationary states under fixed noise",
   "upload_type": "publication",
   "publication_type": "preprint",
-  "version": "1.0.0",
-  "publication_date": "2026-11-14",
+  "version": "2.0.0",
+  "publication_date": "2026-11-18",
   "creators": [
     {
       "name": "Douglas, Seth",
@@ -14,7 +14,7 @@
       "orcid": "0009-0005-6534-1118"
     }
   ],
-  "description": "Which macroscopic questions about a noisy lattice can an algorithm decide from its local rule? Fix dimension seven and one positive rational replacement rate. Every nontrivial property determined by the number of extreme translation-invariant stationary laws, all-law ergodicity, and the existence of a translation-invariant stationary law with nondecaying local covariance is undecidable. A stronger theorem retains the numbers of extreme translation-invariant stationary states with nondecaying covariance and with a Bragg atom at some nonzero wavevector. The same statements hold for finite-depth circuits of local quantum channels with fresh product ancillas, followed by whole-site depolarization. Under a stated published-source condition C_T, at another fixed rational rate the total-count cuts \"at most r\" and \"at least k\" are respectively Π⁰₂-complete for every r ≥ 1 and Σ⁰₂-complete for every k ≥ 2, in both categories. The scope has a decidable boundary: a classical translation-invariant stationary law attains the noise entropy floor exactly when the deterministic rule is constant.",
+  "description": "Which macroscopic questions about a noisy lattice can an algorithm decide from its local rule? We show that already on the line, for deterministic finite-range rules followed by independent uniform replacement at one fixed positive rational rate, every nontrivial property determined by the number of extreme translation-invariant stationary laws, all-law ergodicity, and the existence of a translation-invariant stationary law with nondecaying local covariance is undecidable. A refined theorem retains the numbers of extreme translation-invariant stationary states with nondecaying covariance and with a Bragg atom at some nonzero wavevector. The same holds for circuits of local quantum channels on the line with independent single-qubit depolarization after every layer, and, with uniqueness among all Gibbs measures in place of ergodicity, for Gibbs measures on the square lattice given by positive rational Boltzmann weights. On the line, ergodicity excludes nondecaying covariance, and two or more translation-invariant stationary states force nondecaying covariance and exclude ergodicity, so only four kinds of coarse data can occur. In both line categories, for every r ≥ 1 the cut \"at most r extremes\" is Π⁰₂ and halting-hard, and for every k ≥ 2 the cut \"at least k\" is Σ⁰₂ and nonhalting-hard. In dimension seven the same Rice theorem holds for quantum circuits followed by whole-site depolarization, and under a stated published-source condition C_T, at another fixed rational rate, these cuts are Π⁰₂-complete and Σ⁰₂-complete in both categories. The scope has a decidable boundary: a classical translation-invariant stationary law attains the noise entropy floor exactly when the deterministic rule is constant.",
   "keywords": [
     "probabilistic cellular automata",
     "stationary states",
@@ -22,10 +22,12 @@
     "Rice theorem",
     "Bragg order",
     "local quantum channels",
-    "arithmetical hierarchy"
+    "arithmetical hierarchy",
+    "Gibbs measures",
+    "one-dimensional systems"
   ],
   "access_right": "open",
   "license": "cc-by-4.0",
   "language": "eng",
-  "notes": "Preprint. It has not been peer reviewed. The authors have not independently verified the mathematical arguments; the paper's section 'How this work was done' describes the model-based construction and the cross-family checks. Theorem C is conditional on the stated source condition C_T. Not formalized in Lean. Text: CC BY 4.0. Script: MIT or Apache 2.0."
+  "notes": "Preprint. Version 2.0.0. Theorem C is conditional on the stated source condition C_T. Not formalized in Lean. Text: CC BY 4.0. Script: MIT or Apache 2.0. Previous version: 1.0.0 (10.5281/zenodo.24241164)."
 }

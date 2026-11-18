@@ -1,5 +1,5 @@
 \section{Inputs, stationary data and the refined theorem}\label{sec:framework}
-\subsection{Two effective input categories}
+\subsection{The seven-dimensional input categories}
 A classical input consists of a nonempty finite alphabet $\mathsf A$, a finite stencil $\mathcal N\subset\Z^7$, and a deterministic table $F:\mathsf A^{\mathcal N}\to\mathsf A$. One round applies $F$ at every site and then replaces each whole output symbol independently by a uniform symbol with probability $\eps_0$. The flags and replacement values are independent across sites and times. The resulting local transition probabilities are
 \[
  p(a\mid u)=(1-\eps_0)\one_{\{a=F(u)\}}+\eps_0/|\mathsf A|.
@@ -59,7 +59,7 @@ In each input category separately, every nontrivial predicate of $\sigma$ is und
 This value is realized. If the predicate is false at $\sigma_\infty$, halting many-one reduces to it; if true there, nonhalting many-one reduces to it. Every predicate of the datum is invariant under on-site relabeling or unitary conjugation, as appropriate, and adjoining an independent constant bath.
 \end{maintheorem}
 
-Exactly-$k$ conditions are subject to nontriviality. For each finite $k\ge2$, realizability of $N=k$ at these parameters remains open; if realized, deciding $N=k$ is halting-hard. The universal condition $N\ge1$ is trivial. The theorem concerns this stationary datum, with varying finite alphabet or site dimension and range. Full stationary-set isomorphism, entanglement, storage, topological order and equilibrium Gibbs properties require other arguments. We make no fixed-alphabet or lower-dimensional assertion.
+Exactly-$k$ conditions are subject to nontriviality. For each finite $k\ge2$, realizability of $N=k$ at these parameters remains open; if realized, deciding $N=k$ is halting-hard. The universal condition $N\ge1$ is trivial. The theorem concerns this stationary datum, with varying finite alphabet or site dimension and range. Full stationary-set isomorphism, entanglement, storage, topological order and equilibrium Gibbs properties require other arguments. The fixed-alphabet question remains open. The line results use the separate input conventions in Section~\ref{sec:line-results}.
 
 \subsection{Compactness and extreme lifts}
 We give the elementary facts needed in the proof.
@@ -85,5 +85,3 @@ If the covariance tended to zero, expansion as a double sum would make this vari
 
 For $q\ne0$, the weighted mean $\omega(\operatorname{Av}_n^q(f))$ tends to zero by a geometric-sum factor in a coordinate with $q_i\ne0$. If connected covariance decayed, its weighted double sum would vanish by the same near-pair/far-pair argument. Thus a positive Bragg moment forces nondecay.
 \end{proof}
-
-

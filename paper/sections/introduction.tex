@@ -3,33 +3,67 @@ Positive noise gives every local transition a positive probability. It does not 
 
 Our main assertion has the Rice form: every nontrivial property of a specified stationary datum is undecidable. Here nontrivial means that the property holds for at least one valid input and fails for another. A translation-invariant stationary law is extreme when it is an extreme point of the convex set of such laws. We count these extreme points with their full cardinality. All-law (quantumly, all-state) ergodicity means local convergence to one stationary law or state from every initial law or state, including spatially noninvariant ones. We use the term all-law ergodicity in both categories.
 
-The classical conclusion can be stated without the construction's machinery.
+The headline results concern the infinite line. At one fixed positive rational
+rate, Theorems~\ref{thm:line-classical} and~\ref{thm:line-quantum} give the Rice
+assertion for classical replacement and for independent single-qubit
+depolarization after every circuit layer, respectively.
+Theorem~\ref{thm:line-refined} retains the ordered and Bragg-ordered extreme
+counts. The quantum gates are arbitrary exact finite local channels; their
+finite arity may grow with the input. Theorem~\ref{thm:line-gibbs} gives a
+square-lattice Gibbs analogue for strictly positive rational local weights,
+with temperature absorbed into the weights. The whole-site, once-per-round
+quantum category is not covered on the line, nor is the class of binary
+energy tables at one fixed temperature.
+
+For comparison, the following seven-dimensional assertion remains part of
+the result.
 \begin{maintheorem}\label{thm:core}
 For deterministic finite-range rules on $\Z^7$ followed by uniform replacement at one fixed positive rational rate, every nontrivial property determined by the number of extreme translation-invariant stationary laws, all-law ergodicity, and existence of a translation-invariant stationary law with nondecaying local covariance is undecidable.
 \end{maintheorem}
 
-The rate is explicit in \eqref{eq:constants}. The alphabet and finite range may vary. The conclusion includes uniqueness of the translation-invariant stationary law, ergodicity, and every nontrivial cardinality condition on the extreme set. The same parameters work for all properties at once.
+For this seven-dimensional assertion the rate is explicit in \eqref{eq:constants}. The alphabet and finite range may vary. The conclusion includes uniqueness of the translation-invariant stationary law, ergodicity, and every nontrivial cardinality condition on the extreme set. The same parameters work for all properties at once.
 
 One might expect every property of the stationary laws to be undecidable. That is false, and the counterexample fixes the scope. We prove that a stationary spatial Shannon entropy density attains the minimum forced by replacement noise exactly when the deterministic local rule is constant. A finite table scan decides this property. Binary reset and noisy identity have the same datum in Theorem~\ref{thm:core}, but opposite entropy-floor verdicts. Thus the datum, rather than the phrase ``stationary property'', identifies the Rice class.
 
-The covariance flag in Theorem~\ref{thm:core} allows mixtures. Two distinct translation-invariant stationary laws already give a mixture with nondecaying covariance, by the variance of spatial averages. Order in an individual extreme state is a more discriminating question. Our stronger theorem retains both the number of ordered extreme states and the number having a Bragg atom at some nonzero wavevector. It holds for classical rules and for finite-depth local quantum circuits with whole-site depolarization. The construction and its two outcomes appear in Figure~\ref{fig:mechanism}.
+The covariance flag in Theorem~\ref{thm:core} allows mixtures. Two distinct translation-invariant stationary laws already give a mixture with nondecaying covariance, by the variance of spatial averages. Order in an individual extreme state is a more discriminating question. Our stronger theorem retains both the number of ordered extreme states and the number having a Bragg atom at some nonzero wavevector. On the line it holds in the two categories just specified; in dimension seven it holds also for finite-depth local quantum circuits with whole-site depolarization. The construction and its two outcomes appear in Figure~\ref{fig:mechanism}.
 
-The proof couples an arbitrary input, the host, to a computable controller built from a Wang tile set, with one shared replacement flag per site. If the tile set does not tile the plane, the controller forgets every initial configuration on a common event whose probability tends to one, and the coupled medium has exactly the host's datum. If it tiles, every coupled medium has one fixed datum with continuum many ordered extreme TI stationary states. That value absorbs every host, so any property that separates it from some input is as hard as halting or nonhalting. The dimension is six for the imported controller plus one direction of independent slices.
+On the line, the controller consists of two copies of the unchanged
+hardwired hierarchy of \cite[Theorem~C]{DMline}. If the program halts,
+a common graphical map forgets every initial controller row and the coupled
+system has exactly the datum of the arbitrary input, called the host.
+If it never halts, high-rank spatial addresses reveal the relative origin
+of the two hierarchies with summable error. Their compatible relative
+origins label continuum many extreme TI stationary states. Each selected
+state has a single-row Bragg atom at $\pi$. One universal datum therefore
+absorbs every host, giving the Rice reduction. Figure~\ref{fig:mechanism}
+shows the two alternatives.
 
 \begin{figure}[ht]
 \centering
 \begin{tikzpicture}[>=Stealth,box/.style={draw,rounded corners,align=center,font=\small,inner sep=5pt}]
-\node[box] (e) at (0,0) {machine $e$\\Wang set $R_e$};
-\node[box] (j) at (4.0,0) {host $H$ + controller $\mathsf C_{R_e}$\\one replacement flag per site};
-\node[box] (h) at (4.0,-1.7) {arbitrary finite host $H$};
-\node[box] (d) at (9.5,1) {halts: preserves $\sigma(H)$\\stationary affine correspondence};
-\node[box] (l) at (9.5,-1) {never halts: continuum many Bragg-\\ordered extreme TI stationary states};
-\draw[->] (e)--(j);\draw[->] (h)--(j);\draw[->] (j)--(d);\draw[->] (j)--(l);
+\node[box] (e) at (0,0) {program $n$\\host $H$};
+\node[box] (j) at (4.2,0) {two hierarchies on $\Z$\\coupled to $H$};
+\node[box] (h) at (9.1,0.85) {halts: $\sigma(H)$\\unique stationary lift};
+\node[box] (l) at (9.1,-0.85) {never halts: $\sigma_\infty$\\relative origins and peak $\pi$};
+\draw[->] (e)--(j);\draw[->] (j)--(h);\draw[->] (j)--(l);
 \end{tikzpicture}
-\caption{One finite construction separates an arbitrary host datum $\sigma(H)$ (Section~\ref{sec:framework}) from a universal datum. The controller pairs two registers, uses independent slices and swaps registers on alternate sites, which produces a period-two peak at $q_\pi=(\pi,\ldots,\pi)$. Its crystalline states are extreme among TI states; each averages two non-TI periodic stationary states.}\label{fig:mechanism}
+\caption{The line construction preserves every host datum in the halting
+case and has continuum many Bragg-ordered extreme TI stationary states
+in the nonhalting case. Relative spatial origins survive the averaging
+needed for translation invariance and stationarity.}\label{fig:mechanism}
 \end{figure}
 
-The total phase count also has a precise arithmetical degree. Here a phase means an extreme TI stationary law or state. Under the published-source condition $C_T$ in Section~\ref{sec:completeness}, Theorem~\ref{thm:completeness} makes ``at most $r$ phases'' $\Pi^0_2$-complete for every $r\ge1$ and ``at least $k$ phases'' $\Sigma^0_2$-complete for every $k\ge2$, in both input categories at another single fixed rational rate. A stationary version of host preservation gives one-sided second-level hardness for every nontrivial predicate of $(N,N_{\ord},N_{\Br},L)$ and excludes nontrivial $\Delta^0_2$ members. The total-count cuts are the concrete complete instances; the ordered counts and covariance flag have no arithmetic upper bounds established here.
+The separate seven-dimensional proof uses a Wang controller on six
+coordinates and independent slices in the seventh. Its crystalline
+amplification and whole-site quantum implementation are retained in
+Sections~\ref{sec:controller}--\ref{sec:rice}.
+
+On the line the finite upper total-count cuts belong to $\Pi^0_2$ and are
+halting-hard; finite lower cuts belong to $\Sigma^0_2$ and are
+nonhalting-hard (Theorem~\ref{thm:line-cuts}). Matching second-level hardness
+on the line is not established here.
+
+In dimension seven the total phase count also has a conditional precise arithmetical degree. Here a phase means an extreme TI stationary law or state. Under the published-source condition $C_T$ in Section~\ref{sec:completeness}, Theorem~\ref{thm:completeness} makes ``at most $r$ phases'' $\Pi^0_2$-complete for every $r\ge1$ and ``at least $k$ phases'' $\Sigma^0_2$-complete for every $k\ge2$, in both input categories at another single fixed rational rate. A stationary version of host preservation gives one-sided second-level hardness for every nontrivial predicate of $(N,N_{\ord},N_{\Br},L)$ and excludes nontrivial $\Delta^0_2$ members. The total-count cuts are the concrete complete instances; the ordered counts and covariance flag have no arithmetic upper bounds established here.
 
 \subsection{Relation to earlier work}
 Rice's theorem concerns nontrivial semantic properties of computably enumerable sets \cite{rice}. Kari established the corresponding theorem for limit sets of one-dimensional cellular automata \cite{kari-rice}; Guillon and Richard refined its fixed-alphabet aspects \cite{guillon-richard}. Delacourt proved Rice theorems for $\mu$-limit sets and generic limit sets \cite{delacourt,delacourt-generic}. Hellouin de Menibus and Sablik, and Delacourt and Hellouin de Menibus, obtained Rice theorems for sets of limit measures from random initial configurations \cite{hellouin-sablik,delacourt-hellouin}. Their dynamics is deterministic. Table~\ref{tab:landscape} places ongoing noise beside these limit constructions.
@@ -42,7 +76,7 @@ Kari; Delacourt & Deterministic CA limit sets; random initial data for $\mu$-lim
 Hellouin de Menibus--Sablik; Delacourt--Hellouin de Menibus & Limit-measure sets from a Bernoulli initial law & Nontrivial properties of these sets\\
 Kurdyumov; Toom; Bu\v{s}i\'c--Mairesse--Marcovici & PCA allowing zero transition probabilities & Ergodicity\\
 Marsan--Sablik & Uniform perturbation as noise tends to zero & Stochastic stability\\
-Marcovici--Taati & Positive-rate PCA with fixed uniform noise & Stationary Bernoulli existence versus nonexistence\\
+Marcovici--Taati & Positive-rate PCA in dimension at least two, with fixed uniform noise & Stationary Bernoulli existence versus nonexistence\\
 Douglas--Mghirbi preprints & Fixed-noise controllers and noise diagrams & Ergodicity and stationary multiplicity\\
 This paper & Stationary classical and quantum states at fixed positive noise & Every nontrivial predicate of the stated datum\\\bottomrule
 \end{tabularx}
@@ -51,18 +85,44 @@ This paper & Stationary classical and quantum states at fixed positive noise & E
 
 Undecidability of PCA ergodicity goes back to Kurdyumov and Toom \cite{kurdyumov,toom-undecidable,toom-continuous,toom-book,gacs-survey}. Their local rules may have zero transition probabilities. Bu\v{s}i\'c, Mairesse and Marcovici prove that ergodicity of a deterministic one-dimensional CA is equivalent to nilpotency \cite{busic-mairesse-marcovici}, whose undecidability is due to Kari \cite{kari-nilpotency}. Unique ergodicity for deterministic CA is also undecidable \cite{torma}; that temporal notion concerns invariant measures of the deterministic map. It is distinct from uniqueness within the TI stationary set used for our count.
 
-Marsan and Sablik prove undecidability of stochastic stability under uniform perturbations in the zero-noise limit \cite{marsan-sablik}. Marcovici and Taati prove computable inseparability between positive-rate PCA admitting the uniform stationary Bernoulli law and those admitting no stationary Bernoulli law \cite[Theorem~3]{marcovici-taati}. Their construction permits a chosen fixed rational replacement rate. The additional assertion here is the Rice closure over our stationary datum. Work of Toom and G\'acs explains how persistent memory can coexist with positive rates \cite{Toom80,gacs2001}. Marsan, Sablik and T\"orm\"a exhibit a perturbed CA with two ergodicity transitions \cite{marsan-sablik-torma}.
+Marsan and Sablik prove undecidability of stochastic stability under uniform perturbations in the zero-noise limit \cite{marsan-sablik}. In every dimension at least two, Marcovici and Taati prove computable inseparability between positive-rate PCA admitting the uniform stationary Bernoulli law and those admitting no stationary Bernoulli law \cite[Theorem~3]{marcovici-taati}. Their construction permits any chosen rational replacement rate in $(0,1)$. The additional assertion here is the Rice closure over our stationary datum. Work of Toom and G\'acs explains how persistent memory can coexist with positive rates \cite{Toom80,gacs1986,gacs2001}. The hardwired hierarchy imported from \cite{DMline} adapts the reliable-computation and self-repair organization of G\'acs \cite{gacs1986}; the new steps here are the relative-origin construction and the host correspondence. Marsan, Sablik and T\"orm\"a exhibit a perturbed CA with two ergodicity transitions \cite{marsan-sablik-torma}.
 
-Gu, Weedbrook, Perales and Nielsen formulated a Rice programme for macroscopic ground-state properties of periodic Ising systems and expected it to extend to positive temperature \cite{gu-et-al}. At a fixed positive temperature, Sandhu proved that uniqueness of the Gibbs state is undecidable for a computable family of translation-invariant finite-range interactions on $\Z^2$ \cite{sandhu}; see also \cite{DMthermal}. For quantum ground states, spectral-gap and phase-diagram undecidability were established by Cubitt, P\'erez-Garc\'ia and Wolf and by Bausch, Cubitt and Watson \cite{cubitt-perez-garcia-wolf,bausch-cubitt-watson}. Our quantum dynamics is dissipative and locally implemented. Its hardness is inherited from a classical measure-and-prepare controller. Carrasco-Vargas proved that every nontrivial dynamical property of sofic subshifts on groups with undecidable domino problem is undecidable, and that computable real invariants of SFTs monotone under disjoint unions and products are constant \cite{carrasco-vargas}; our bath invariance plays a role similar to his product monotonicity.
+Gu, Weedbrook, Perales and Nielsen formulated a Rice programme for macroscopic ground-state properties of periodic Ising systems and expected it to extend to positive temperature \cite{gu-et-al}. At a fixed positive temperature, Sandhu proved that uniqueness of the Gibbs state is undecidable for a computable family of translation-invariant finite-range interactions on $\Z^2$ \cite{sandhu}; see also \cite{DMthermal}. The space-time Gibbs representation of PCA goes back to Domany and Kinzel \cite{domany-kinzel} and was developed by Goldstein, Kuik, Lebowitz and Maes \cite{goldstein-kuik-lebowitz-maes} and by Lebowitz, Maes and Speer \cite{lebowitz-maes-speer}. Mi\k{e}kisz and Taati use noise-resilient automata to construct nonperiodic low-temperature Gibbs states for finite-range interactions on $\Z^4$ \cite{miekisz-taati}. The all-DLR uniqueness implication used in our square-lattice reduction is \cite[Theorem~3.1]{DMspacetime}. For quantum ground states, spectral-gap and phase-diagram undecidability were established by Cubitt, P\'erez-Garc\'ia and Wolf and by Bausch, Cubitt and Watson \cite{cubitt-perez-garcia-wolf,bausch-cubitt-watson}. Our quantum dynamics is dissipative and locally implemented. Its hardness is inherited from a classical measure-and-prepare controller. Carrasco-Vargas proved that every nontrivial dynamical property of sofic subshifts on groups with undecidable domino problem is undecidable, and that computable real invariants of SFTs monotone under disjoint unions and products are constant \cite{carrasco-vargas}; our bath invariance plays a role similar to his product monotonicity.
 
 Effective symbolic systems and entropy invariants are treated more broadly by Hochman and by Hochman and Meyerovitch \cite{hochman,hochman-meyerovitch}. Zero-noise limit-measure sets are characterized by Marsan and Sablik \cite{marsan-zero}.
 
 For isolated quantum dynamics, Shiraishi and Matsumoto prove undecidability of thermalization even for one-dimensional shift-invariant nearest-neighbor systems with a fixed product initial state \cite{shiraishi-matsumoto}.
 
-Our earlier preprints prove that ergodicity is undecidable at one fixed rate on $\Z^6$, $\Z^4$ and $\Z^3$, and that a stacked controller on $\Z^7$ has either exactly one invariant measure or a continuum of extreme ones, with no algorithm deciding which \cite[Corollary~3.11]{DMforget}. They also give one noisy automaton with an uncomputable noise diagram \cite{DMdiagram}, and they prove spontaneous magnetization and Gibbs uniqueness undecidable at a fixed positive temperature \cite{DMthermal}. The classical uniqueness, ergodicity and total-count instances of Theorem~\ref{thm:core} therefore already follow from \cite{DMforget}, whose controller theorem we import. The present contribution is the host-preserving construction and its Rice closure, the ordered and Bragg-ordered extreme counts, the long-range-order flag, the quantum category, and the conditional completeness theorem. We did not find a theorem with this stationary-law Rice scope in the literature checked.
+Our earlier preprints prove that ergodicity is undecidable at one fixed rate on $\Z^6$, $\Z^4$ and $\Z^3$, and that a stacked controller on $\Z^7$ has either exactly one invariant measure or a continuum of extreme ones, with no algorithm deciding which \cite[Corollary~3.11]{DMforget}. They also give one noisy automaton with an uncomputable noise diagram \cite{DMdiagram}, and they prove spontaneous magnetization and Gibbs uniqueness undecidable at a fixed positive temperature \cite{DMthermal}. The classical uniqueness and ergodicity instances of Theorem~\ref{thm:core}, and every total-count predicate that distinguishes one extreme from continuum many, therefore already follow from \cite{DMforget}, whose controller theorem we import. The full Rice closure over realized total counts uses the host correspondence. The hardwired line construction of \cite[Theorem~C]{DMline} already proves
+fixed-rate ergodicity undecidability on $\Z$; its one-site temporal witness
+alone does not count stationary row laws. Here the high-rank decoder and
+two-hierarchy relative origins establish continuum many ordered extreme
+stationary laws on the line. The host correspondence yields Rice closure
+in the classical and specified quantum categories. The Gibbs result uses
+\cite[Theorem~3.1]{DMspacetime}, with uniqueness among all DLR measures.
+The seven-dimensional arguments retain the ordered counts, host
+correspondence and conditional completeness theorem described above.
+
+\paragraph{Changes from version 1.0.0.}
+The present paper adds the theorems on the line: the classical, quantum and
+refined Rice theorems (Theorems~\ref{thm:line-classical}--\ref{thm:line-refined}),
+the square-lattice Gibbs version for positive rational weights
+(Theorem~\ref{thm:line-gibbs}), the necessary data on the line
+(Theorem~\ref{thm:line-obstructions}) and partial degree results
+(Theorem~\ref{thm:line-cuts}). Theorems~A, B and~C and the other
+seven-dimensional results are unchanged in statement from version 1.0.0
+(\href{https://doi.org/10.5281/zenodo.24241164}{10.5281/zenodo.24241164}).
 
 \subsection{Reading guide}
-Section~\ref{sec:framework} defines the inputs and refined theorem. Section~\ref{sec:controller} states the imported Wang theorem and constructs the crystalline states. Probability readers can proceed to the stationary correspondence in Section~\ref{sec:preservation}; quantum readers will also find its circuit implementation and treatment of entangled inputs there. Section~\ref{sec:rice} completes the halting reduction and invariance arguments. Statistical mechanics readers can read the crystalline amplification together with the entropy boundary in Section~\ref{sec:entropy}. Symbolic-dynamics and computability readers can treat the Wang theorem and the explicitly conditional source interface in Section~\ref{sec:completeness} as black boxes, then follow the totality reduction there and the effective convex geometry in Appendix~\ref{sec:counts}.
-
-
-
+Section~\ref{sec:framework} fixes the datum and the seven-dimensional input
+conventions. Section~\ref{sec:line-results} specifies the line categories
+and statements. Sections~\ref{sec:line-hierarchy}--\ref{sec:line-preservation}
+prove the hierarchy estimates, relative-origin construction, quantum
+implementation and full host correspondence.
+Section~\ref{sec:line-gibbs} proves the Gibbs theorem;
+Section~\ref{sec:line-obstructions} gives obstructions and partial degrees.
+Sections~\ref{sec:controller}--\ref{sec:rice} give the seven-dimensional
+proofs. The conditional totality reduction is in
+Section~\ref{sec:completeness}, the decidable entropy boundary in
+Section~\ref{sec:entropy}, and effective convex geometry in
+Appendix~\ref{sec:counts}.

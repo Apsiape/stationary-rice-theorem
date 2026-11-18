@@ -1,0 +1,186 @@
+\section{A square-lattice Gibbs Rice theorem}\label{sec:line-gibbs}
+A Gibbs input is a finite-alphabet, finite-range, translation-invariant
+interaction on $\Z^2$ given by finite tables of strictly positive
+rational local Boltzmann weights. Products are exact; at inverse
+temperature $1$ the potentials are minus their logarithms.
+Temperature is absorbed into the weights. This is a computable class
+of rational weight tables; the class of $\{0,1\}$ energy tables at
+one fixed temperature is not covered.
+Let $\cK_G$ be the set of all $\Z^2$-TI DLR measures of the specification.
+Define $N,N_{\ord},N_{\Br},L$ as in Section~\ref{sec:framework}, using
+plane translations, square averages and wavevectors in
+$(\R/2\pi\Z)^2$. Replace $E$ by $U$, uniqueness among \emph{all} DLR
+measures, and write $\sigma_G=(N,N_{\ord},N_{\Br},U,L)$.
+
+\begin{theorem}[Gibbs Rice theorem for rational weights]\label{thm:line-gibbs}
+Every predicate of $\sigma_G$ nonconstant on its realized values is
+undecidable for the rational-weight inputs just defined. This includes
+every nonconstant predicate of $(N,U,L)$ and remains true when all
+infinite counts are reported by one infinity symbol.
+\end{theorem}
+
+\begin{lemma}[The controller Gibbs alternatives]\label{lem:line-gibbs-controller}
+There is a computable rational-weight controller interaction whose
+halting case has a unique DLR measure with exponential covariance
+decay for every pair of local plane observables, and whose nonhalting
+case has continuum many extreme TI DLR measures with a Bragg atom at
+$(\pi,0)$.
+\end{lemma}
+\begin{proof}
+Use the two-track classical controller with one joint replacement
+of probability $e$. If its alphabet has size $a$, put the factor
+\[
+ p(c\mid\xi)=(1-e)\one_{\{c=f_n^{\times2}(\xi)\}}+e/a
+\]
+on each child and its three parents on the preceding row.
+This is a finite-alphabet, radius-one, strictly positive rational
+PCA table normalized by $\sum_c p(c\mid\xi)=1$.
+The interaction is TI, finite range and finite energy. Every
+finite-volume kernel contains all factors whose child-parent
+footprint meets the volume, including exterior children with an
+interior parent.
+
+If $U(n)$ halts, add the two per-lane common-map bounds of
+Lemma~\ref{lem:line-forget}. For every deterministic row $\eta$,
+finite $I$ and time $t$, comparison to a stationary start gives
+\[
+ d_{\mathrm{TV}}((\eta P^t)_I,\mu_I)
+ \le \sum_{x\in I}\sup_\zeta
+       \Pr\{F_t(\eta)(x)\ne F_t(\zeta)(x)\}
+ \le 2C|I|\exp(-ct).
+\]
+More precisely the probability of nonconstancy bounds each supremum,
+so this inequality is uniform over the initial row, not merely an
+estimate for each fixed pair. A stationary row law exists by compactness
+and Ces\`aro averaging. This is uniform exponential ergodicity in the
+exact sense of \cite[Theorem~3.1]{DMspacetime}. That theorem, for the
+normalized space-time specification of a finite-alphabet finite-radius
+strictly positive PCA on the line, gives a unique DLR measure among
+all boundaries and exponential covariance decay between every pair
+of fixed local space-time observations. All its hypotheses have
+therefore been checked for this joint table itself. No independence
+between the two lane estimates is needed. Denote this unique measure
+by $\gamma_C$; its constants may depend on the finite table.
+
+If $U(n)$ never halts, the stationary trajectories in
+Proposition~\ref{prop:line-phases} are $\Z^2$-TI. We verify their DLR
+property directly. For a finite interior volume $\Lambda$ and an
+exterior cylinder test, include every factor touching $\Lambda$,
+all sites of that test, and their parent closure down to a common
+earlier row. This is a finite cone. Given the bottom row its
+forward weight is the product of the PCA factors. All children
+of sites of $\Lambda$ are included, including exterior children.
+When summing over the interior assignment, precisely the factors
+touching $\Lambda$ vary; all other factors and the bottom law are
+independent of that assignment. Dividing by the sum of these weights
+is exactly the Gibbs kernel. This proves the integrated specification
+identity against every exterior cylinder. Exhaustion by cylinders
+and the monotone class theorem give the DLR conditional identity.
+This argument uses stationary kernels and all touching factors; it
+does not assume a converse identifying every DLR law with a trajectory.
+
+The events $B_d$ constructed in Proposition~\ref{prop:line-phases}
+are now ordinary Borel events of full plane configurations and have
+probability one. Average $(-1)^x f(x,t)$ over an $l$ by $l$ square.
+Before mixing translations, its expected value has one common sign
+and absolute value at least $1/2$ throughout the square: the spatial
+grid origin is constant in time. Jensen therefore gives the square
+second moment at least $1/4$ for every $l$. Its limit exists by the
+mean ergodic theorem for the two commuting translations of $\Z^2$
+(space and time), applied to phase-twisted square averages. The
+coboundary proof in Section~\ref{sec:framework} applies verbatim to
+these two commuting unitaries.
+
+The TI DLR set is compact convex metrizable. Indeed, positivity and
+finite range make each local kernel continuous, and its cylinder
+identities and TI equations are closed. Apply
+\cite[Theorem~4.2]{bishop-deleeuw} directly in this set. Probability
+one on $B_d$ passes to almost every extreme component by the ordinary
+mixture identity on Borel sets. Bounded convergence of the finite
+square moments shows that some such component has a positive limit
+at $(\pi,0)$. Distinct $d$ give distinct components. There are at
+most $\frakc$ measures by countable cylinder coordinates, proving
+exactly the asserted continuum of ordered extremes.
+\end{proof}
+
+\begin{lemma}[Arbitrary Gibbs hosts]\label{lem:line-gibbs-host}
+Take the product interaction of any rational-weight host with the
+controller of Lemma~\ref{lem:line-gibbs-controller}. On halting it
+preserves every coordinate of $\sigma_G$; on nonhalting its datum is
+$(\frakc,\frakc,\frakc,\mathrm{false},\mathrm{true})$ independently of
+the host.
+\end{lemma}
+\begin{proof}
+Multiply the local weights on separate host and controller tracks.
+The finite-volume specification kernels factor as
+$\Gamma_\Lambda=\gamma^H_\Lambda\otimes\gamma^C_\Lambda$ for each
+fixed joint boundary. Projecting the joint DLR identity, with
+exterior tests on one track, proves that every marginal is DLR.
+Products of separate DLR measures are joint DLR measures by the
+factorized kernels. Every host has a TI DLR measure: take finite-volume
+measures, use compactness with receding boundaries, pass the continuous
+local DLR identities to a limit, then average translations. The
+same reasoning gives compactness of all the relevant TI DLR sets.
+
+On halting, the controller's unique all-DLR measure is $\gamma_C$.
+We must exclude correlated joint Gibbs laws. Let $\rho$ be any
+joint DLR law, $h$ a bounded host cylinder, $k$ a controller-exterior
+cylinder for $\Lambda$, and $f$ a controller cylinder. The joint
+kernel applied to
+$h\,k\,(f-\gamma^C_\Lambda f)$ is zero: its host factor is
+$\gamma^H_\Lambda h$, while its controller factor is
+$k\,\gamma^C_\Lambda(f-\gamma^C_\Lambda f)=0$.
+This uses idempotence and properness of the specification, and holds
+even if $h$ reads host sites inside $\Lambda$.
+The DLR identity gives
+\[
+ \rho\bigl[h\,k\,(f-\gamma^C_\Lambda f)\bigr]=0.
+\]
+Extend the host test by the monotone class theorem to every bounded
+function of the entire host configuration. Disintegrating over that
+configuration, and using a countable determining collection of
+cylinder identities, shows that the conditional controller law is
+DLR almost surely. It must equal $\gamma_C$. Thus every joint DLR
+measure is $\nu\otimes\gamma_C$ with $\nu$ host DLR. Projection is an
+affine homeomorphism also on TI DLR sets, and it preserves uniqueness
+among all DLR measures.
+
+For order, expand any local joint observable as a finite sum
+$\sum_i a_i\otimes b_i$ in the finite tensor-product basis. Evaluate
+$b_i$ in $\gamma_C$ to define the local host observable
+$G(f)=\sum_i\gamma_C(b_i)a_i$. For two distant translates, the difference
+between their joint two-point moment and the host moment of their
+$G$-observables is a finite sum of terms bounded by host norms times
+controller covariances. Those tend exponentially to zero in every
+plane direction, by Lemma~\ref{lem:line-gibbs-controller}. First moments
+agree exactly. Thus covariance order is preserved. For weighted square
+second moments, separate pairs at bounded displacement from the
+remaining pairs. The first fraction tends to zero as the square
+size grows; the second has uniformly small covariance error when
+the displacement cutoff is large. This proves equality of the
+limiting Bragg moments at each nonzero wavevector. Host-only
+observables give both converse implications. The affine bijection
+preserves extremality and all three counts, and therefore $L$ as well.
+
+On nonhalting, product Gibbs measures give a TI joint lift of every
+extreme controller state with any fixed TI host Gibbs measure.
+Each fiber over such an extreme is a nonempty compact face. Its
+extreme points are extreme in the joint set; the successive coordinate
+maximization argument of Lemma~\ref{lem:compact} proves existence.
+Distinct controller marginals give distinct joint extremes with the
+inherited peak at $(\pi,0)$. All three counts are bounded above by
+$\frakc$, so they equal $\frakc$. Uniqueness among all DLR measures
+fails, and the ordered states give $L$. This proves the second branch.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:line-gibbs}]
+The maximal datum is realized by a fixed nonhalting controller.
+For a nonconstant predicate choose a finite rational-weight host
+with the opposite verdict and hold it fixed. Given $n$, output its
+product with the controller interaction. The factors are positive
+rationals and effectively enumerable. Lemma~\ref{lem:line-gibbs-host}
+gives the host datum on halting and the maximal datum on nonhalting,
+so the same two many-one reductions as in
+Theorem~\ref{thm:line-refined} apply. The argument depends only on
+realized values and survives collapsing infinite counts.
+\end{proof}

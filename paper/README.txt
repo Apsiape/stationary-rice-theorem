@@ -1,10 +1,9 @@
 A Rice theorem for stationary states under fixed noise
 Seth Douglas and Nidhal Mghirbi
-Version 1.0.0, November 2026
 
-Build: python -B build.py [--build-dir NEW_OR_EMPTY_DIRECTORY]
-Requires Python 3 and pdflatex with the packages loaded by main.tex. The bibliography is in references.tex. The build
-runs pdflatex three times without shell escape and rejects warnings, unresolved references and overfull or underfull
-boxes. main.pdf is the compiled preprint (23 pages); abstract.txt is the abstract as plain text. main.tex includes the
-sections in sections/, the appendix sections/counts.tex and the bibliography in references.tex.
-No publication or submission is performed by the build.
+The sources include the line and square-lattice rational-weight results.
+abstract.txt is the abstract of main.tex as plain text.
+
+Build main.tex with pdfLaTeX three times, without shell escape.
+The bibliography is in references.tex. All TeX dependencies are included.
+The resulting main.pdf is the compiled preprint.
